@@ -3,5 +3,6 @@
 
 void inicializaMemoria(int m);
 void insereMemoria(unsigned int instrucao);
+void printMemoria(int memsize);
 
 #endif
