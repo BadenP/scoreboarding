@@ -163,12 +163,16 @@ unsigned int instrucaoParaBinario(char *buffer){
         inst = inst | rs;
         rt = rt << 16;
         inst = inst | rt;
-        imm = imm << 0;
+        if(imm != abs(imm)){
+        	int sinal = 1;
+        	sinal = sinal << 15;
+        	inst = inst | sinal;
+		}	
+        imm = abs(imm) << 0;
         inst = inst | imm;
-
     }
 
-    printf("%u",inst);
+    printf("%u\n",inst);
     return inst;
 }
 
@@ -207,7 +211,7 @@ void printBinario(unsigned int num) {
     printf("\n");
 }
 
-
+/*
 int main(int argc, char *argv[]){
     FILE* instrucoes;
     char buffer[256];
@@ -221,9 +225,7 @@ int main(int argc, char *argv[]){
         pc++;
     }
 
-    for(int i=0; i<memsize; i++){
-        printf("\n%u",memoria[i]);
-    }
+    printMemoria(memsize);
 
     return 0;
-}
+}*/
