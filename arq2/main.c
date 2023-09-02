@@ -5,6 +5,9 @@
 #include "memoria.h"
 #include "registradores.h"
 #include "main.h"
+#include "unidade_funcional.h"
+
+int ciclosParaExecutar[16];
 
 int getValor(const char *linha) {
     char *separador = strstr(linha, ":");
@@ -27,6 +30,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	    arquivo = fopen(file, "r");
 	    //int memsize = atoi(argv[4]);
         inicializaMemoria(memsize);
+		//inicializaUFS(ufadd, ufinti, ufmul);
 	
 	    if (arquivo == NULL) {
 	        printf("Erro ao abrir o arquivo.\n");
@@ -67,6 +71,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	addiCiclos = valor; //QUANTIDADE DE CICLOS DA ADDI
+							ciclosParaExecutar[1]=addiCiclos;
 	            	}
 	            	else if (strstr(buffer, "add")) {
 	                	valor = getValor(buffer);
@@ -74,6 +79,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	                    	ufadd = valor; //QUANTIDADE DE UF ADD
 	                	else if (categoria == INST)
 	                    	addCiclos = valor; //QUANTIDADE DE CICLOS DA ADD
+							ciclosParaExecutar[0]=addCiclos;
 	            	} 
 					else if (strstr(buffer, "mul")) {
 	                	valor = getValor(buffer);
@@ -81,6 +87,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	                    	ufmul = valor; //QUANTIDADE DE UF MUL
 	                	else if (categoria == INST)
 	                    	mulCiclos = valor; //QUANTIDADE DE CICLOS DA MUL
+							ciclosParaExecutar[4]=mulCiclos;
 	            	} 
 					else if (strstr(buffer, "int")) {
 	                	valor = getValor(buffer);
@@ -91,66 +98,79 @@ void leituraArquivo(char * file, int memsize, char * output){
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	divCiclos = valor; //QUANTIDADE DE CICLOS DA DIV
+							ciclosParaExecutar[5]=mulCiclos;
 	            	}
 	            	else if (strstr(buffer, "subi")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	subiCiclos = valor; //QUANTIDADE DE CICLOS DA SUBI
+							ciclosParaExecutar[3]=subiCiclos;
 	            	}
                     else if (strstr(buffer, "sub")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
-	                   	 	subCiclos = valor; //QUANTIDADE DE CICLOS DA SUBI
+	                   	 	subCiclos = valor; //QUANTIDADE DE CICLOS DA SUB
+							ciclosParaExecutar[2]=subCiclos;
 	            	}
 	            	else if (strstr(buffer, "lw")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	lwCiclos = valor; //QUANTIDADE DE CICLOS DA LW
+							ciclosParaExecutar[14]=lwCiclos;
 	            	}
 	            	else if (strstr(buffer, "sw")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	swCiclos = valor; //QUANTIDADE DE CICLOS DA SW
+							ciclosParaExecutar[15]=swCiclos;
 	            	}
 	            	else if (strstr(buffer, "beq")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	beqCiclos = valor; //QUANTIDADE DE CICLOS DA BEQ
+							ciclosParaExecutar[11]=beqCiclos;
 	            	}
 	            	else if (strstr(buffer, "bne")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	bneCiclos = valor; //QUANTIDADE DE CICLOS DA BNE
+							ciclosParaExecutar[12]=bneCiclos;
 	            	}
 	            	else if (strstr(buffer, "blt")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	bltCiclos = valor; //QUANTIDADE DE CICLOS DA BLT
+							ciclosParaExecutar[9]=bltCiclos;
 	            	}
 	            	else if (strstr(buffer, "bgt")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	bgtCiclos = valor; //QUANTIDADE DE CICLOS DA BGT
+							ciclosParaExecutar[10]=bgtCiclos;
 	            	}
 	            	else if (strstr(buffer, "j")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	jCiclos = valor; //QUANTIDADE DE CICLOS DA J
+							ciclosParaExecutar[13]=jCiclos;
 	            	}
 	            	else if (strstr(buffer, "and")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	andCiclos = valor; //QUANTIDADE DE CICLOS DA AND
+							ciclosParaExecutar[6]=andCiclos;
 	            	}
 	            	else if (strstr(buffer, "or")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	orCiclos = valor; //QUANTIDADE DE CICLOS DA OR
+							ciclosParaExecutar[7]=orCiclos;
 	            	}
 	            	else if (strstr(buffer, "not")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == INST)
 	                   	 	notCiclos = valor; //QUANTIDADE DE CICLOS DA NOT
+							ciclosParaExecutar[8]=notCiclos;
 	            	}
 	            }
 	            else if (categoria == DADOS){
@@ -180,7 +200,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	    printf("Ciclos de clock necessarios\npara completar a execucao:\nadd: %d, mul: %d, lw: %d\n", addCiclos, mulCiclos, lwCiclos);
         printf("div: %d, and: %d, addi: %d\nsubi: %d, or: %d, not: %d\n", divCiclos, andCiclos, addiCiclos, subiCiclos, orCiclos, notCiclos);
         printf("bgt: %d, blt: %d, beq: %d\nbne: %d, j: %d, sw: %d, sub: %d\n", bgtCiclos, bltCiclos, beqCiclos, bneCiclos, jCiclos, swCiclos, subCiclos);
-	
+		inicializaPipeline();
 
 	if(output!=NULL){
 		FILE *arq;

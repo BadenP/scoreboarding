@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include "scoreboarding.h"
 
-
-void statusInstrucoes();
+statusInstrucoes statusI;
 
 void statusRegistradores();
 

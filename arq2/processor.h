@@ -8,11 +8,11 @@
 #include "memoria.h"
 
 typedef struct {
-    unsigned int busca;
-    unsigned int emissao;
-    unsigned int leitura_op;
-    conjuntoUFS execucao;
-    unsigned int escrita;
+    int busca;
+    int emissao;
+    int leitura_op;
+    int * execucao[3];
+    int escrita;
 }pipeline;
 
 extern pipeline pipe;

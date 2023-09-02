@@ -23,9 +23,11 @@ typedef struct {
     UF* ufAdd;
     UF* ufMul;
     UF* ufInt;
+    int qtdeADD, qtdeMUL, qtdeINT;
 } conjuntoUFS;
 
-extern UF * vetorResultados;
+extern UF * vetorResultados; //Esse vetor serve para mostrar quais registradores de destino vão ser escritos ao final da execução 
+extern conjuntoUFS unidadesFuncionais;
 
 void printConjuntoUFS(conjuntoUFS* conjunto);
 void printUF(UF* uf);

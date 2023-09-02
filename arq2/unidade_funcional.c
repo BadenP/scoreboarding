@@ -3,6 +3,7 @@
 #include "unidade_funcional.h"
 #include <stdbool.h>
 
+conjuntoUFS unidadesFuncionais;
 
 const char* tipoToString(tipoUF tipo) {
     switch (tipo) {
@@ -39,47 +40,47 @@ void printUFS(UF* ufs, int qtde){
 }
 
 
-void inicializaConjuntoUFs(conjuntoUFS *UFS, int add, int mul, int inteiro){
-    UFS->ufAdd = (UF*)malloc(sizeof(UF*)*add);
-    UFS->ufMul = (UF*)malloc(sizeof(UF*)*mul);
-    UFS->ufInt = (UF*)malloc(sizeof(UF*)*inteiro);
+void inicializaUFs(int add, int inter, int mul){
+    unidadesFuncionais.ufAdd = (UF*)malloc(sizeof(UF*)*add);
+    unidadesFuncionais.ufInt = (UF*)malloc(sizeof(UF*)*inter);
+    unidadesFuncionais.ufMul = (UF*)malloc(sizeof(UF*)*mul);
 }
 
-int getUFdisponivel(UF *uf){
+/* int getUFdisponivel(UF *uf){
     for(int i=0; i<sizeof(uf); i++){
         if(uf[i].busy == false){
             return i;
         }
     }
-}
+} */
 
-int ufDisponivel(tipoUF tipo, conjuntoUFS *UFS){
+int getUFDisponivel(tipoUF tipo){
     if(tipo==ADD){
-        for(int i=0; i<sizeof(UFS->ufAdd); i++){
-            if(UFS->ufAdd->busy==1){
-                return 0;
+        for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
+            if(unidadesFuncionais.ufAdd[i].busy==false){
+                return i;
             }
         }
     }
     if(tipo==MUL){
-        for(int i=0; i<sizeof(UFS->ufMul); i++){
-            if(UFS->ufMul->busy==1){
-                return 0;
+        for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
+            if(unidadesFuncionais.ufAdd[i].busy==false){
+                return i;
             }
         }
     }
     if(tipo==INT){
-        for(int i=0; i<sizeof(UFS->ufInt); i++){
-            if(UFS->ufInt->busy==1){
-                return 0;
+        for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
+            if(unidadesFuncionais.ufAdd[i].busy==false){
+                return i;
             }
         }
     }
 
-    return 1;
+    return -1;
 }
 
-/* tipoUF getUF(unsigned int instrucao){
+tipoUF getTipoUF(unsigned int instrucao){
     if(getOpcode(instrucao)==0 || getOpcode(instrucao)==1 || getOpcode(instrucao)==2 || getOpcode(instrucao)==3){
         return ADD;
     }
@@ -89,4 +90,4 @@ int ufDisponivel(tipoUF tipo, conjuntoUFS *UFS){
     else if(getOpcode(instrucao)==6 || getOpcode(instrucao)==7 || getOpcode(instrucao)==8 || getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
         return INT;
     }
-} */
+} 

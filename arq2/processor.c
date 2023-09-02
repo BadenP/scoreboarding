@@ -5,17 +5,6 @@
 
 pipeline pipe;
 
-void inicializaPipeline(int add, int mul, int inteiro){
-
-    pipe.execucao.ufAdd=(UF*)malloc(sizeof(UF*)*add);
-    pipe.execucao.ufInt=(UF*)malloc(sizeof(UF*)*mul);
-    pipe.execucao.ufMul=(UF*)malloc(sizeof(UF*)*inteiro);
-    pipe.execucao.ufAdd->tipo=0;
-    pipe.execucao.ufMul->tipo=1;
-    pipe.execucao.ufInt->tipo=2;
-
-}
-
 int buscaInstrucao(pipeline pipe, int pc, int barramento){
     colocaBarramento(memoria[pc]);
     pipe.busca = pegaBarramento(barramento);
@@ -53,105 +42,57 @@ unsigned int getRegistradorFonte2(unsigned int instrucao){
 }
 
 
-int verificaWAW(pipeline pipe, conjuntoUFS *UFS){
-    for(int i=0; i<3; i++){
-        //AO INVÉS DE SIZEOF TEM QUE USAR O TAMANHO DA UF QUE FOI PASSADO COMO PARAMETRO
-        for(int j=0; j<sizeof(UFS->ufAdd); j++){
-            if(getRegistradorFonte1(pipe.busca)==UFS->ufAdd[j].fi){
-                return 0;
-            }
-            if(getRegistradorFonte2(pipe.busca)==UFS->ufAdd[j].fi){
-                return 0;
-            }
-        }
-        for(int j=0; j<sizeof(UFS->ufMul); j++){
-            if(getRegistradorFonte1(pipe.busca)==UFS->ufMul[j].fi){
-                return 0;
-            }
-            if(getRegistradorFonte2(pipe.busca)==UFS->ufMul[j].fi){
-                return 0;
-            }
-        }
-        for(int j=0; j<sizeof(pipe.execucao.ufInt); j++){
-            if(getRegistradorFonte1(pipe.busca)==UFS->ufInt[j].fi){
-                return 0;
-            }
-            if(getRegistradorFonte2(pipe.busca)==UFS->ufInt[j].fi){
-                return 0;
-            }
-        }
-    }
-    //NAO PRECISA VERIFICAR TUDO ISSO EH SO OLHAR NA UF EU ACHO
-    /*
-    if(getRegistradorFonte1(pipe.busca)==getRegistradorDestino(pipe.leitura_op)){
-        return 0;
-    }
-    if(getRegistradorFonte2(pipe.busca)==getRegistradorDestino(pipe.leitura_op)){
-        return 0;
-    }
-    if(getRegistradorFonte1(pipe.busca)==getRegistradorDestino(pipe.escrita)){
-        return 0;
-    }
-    if(getRegistradorFonte2(pipe.busca)==getRegistradorDestino(pipe.escrita)){
-        return 0;
-    }
-    if(getRegistradorFonte1(pipe.busca)==getRegistradorDestino(pipe.emissao)){
-        return 0;
-    }
-    if(getRegistradorFonte2(pipe.busca)==getRegistradorDestino(pipe.emissao)){
-        return 0;
-    }
-    */
-    return 1;
-}
 
-/* void emiteInstrucao(pipeline *pipe, conjuntoUFS *UFS){
-    if(verificaWAW(*pipe, UFS) && ufDisponivel(getUF(pipe->busca), UFS)){
-        tipoUF ufinst = getUF(pipe->busca);
-        if(ufinst==ADD){
-            int disponivel = getUFdisponivel(UFS->ufAdd);
-            UFS->ufAdd[disponivel].busy = 1;
-            UFS->ufAdd[disponivel].fi = getRegistradorDestino(pipe->busca);
-            UFS->ufAdd[disponivel].fj = getValor(getRegistradorFonte1(pipe->busca));
-            UFS->ufAdd[disponivel].fk = getValor(getRegistradorFonte2(pipe->busca));
-            UFS->ufAdd[disponivel].operacao = getOpcode(pipe->busca);
-            UFS->ufAdd[disponivel].qj = UFresultado(getRegistradorFonte1(pipe->busca));
-            UFS->ufAdd[disponivel].qk = UFresultado(getRegistradorFonte2(pipe->busca));
+void emiteInstrucao(){
+    int regDestino = getRegistradorDestino(pipe.busca);
+    tipoUF tipoUF_inst = getTipoUF(pipe.busca);
+    int disponivel = getUFDisponivel(tipoUF_inst);
+    if(regDestino!=vetorResultados[regDestino].fi && disponivel!=-1){
+        if(tipoUF_inst==ADD){
+            unidadesFuncionais.ufAdd[disponivel].busy = true;
+            unidadesFuncionais.ufAdd[disponivel].fi = getRegistradorDestino(pipe.busca);
+            unidadesFuncionais.ufAdd[disponivel].fj = getValor(getRegistradorFonte1(pipe.busca));
+            unidadesFuncionais.ufAdd[disponivel].fk = getValor(getRegistradorFonte2(pipe.busca));
+            unidadesFuncionais.ufAdd[disponivel].operacao = getOpcode(pipe.busca);
+            unidadesFuncionais.ufAdd[disponivel].qj = UFresultado(getRegistradorFonte1(pipe.busca));
+            unidadesFuncionais.ufAdd[disponivel].qk = UFresultado(getRegistradorFonte2(pipe.busca));
+
+            pipe.emissao=pipe.busca;
             //ACHO QUE NAO PRECISA DE TUDO ISSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
             /*
-            for(int i=0; i<sizeof(UFS->ufAdd); i++){
-                if(UFS->ufAdd[i].busy==0){
-                    UFS->ufAdd[i].busy = 1;
+            for(int i=0; i<sizeof(unidadesFuncionais->ufAdd); i++){
+                if(unidadesFuncionais->ufAdd[i].busy==0){
+                    unidadesFuncionais->ufAdd[i].busy = 1;
                     //VERIFICAR SE O VALOR A SER ESCRITO JÁ ESTÁ PRONTO
-                    //PRA FAZER ISSO BASTA VERIFICAR SE O REGISTRADOR É DESTINO DE ALGUMA OPERACAO NAS UFS
+                    //PRA FAZER ISSO BASTA VERIFICAR SE O REGISTRADOR É DESTINO DE ALGUMA OPERACAO NAS unidadesFuncionais
                     //AO INVÉS DE SIZEOF TEM QUE USAR O TAMANHO DA UF QUE FOI PASSADO COMO PARAMETRO
                     //PROBLEMA AQUI::: SABER QUAL FOI O ÚLTIMO A ENTRAR NO PIPELINE
-                    for(int j=0; j<sizeof(UFS->ufAdd); j++){
-                        if(UFS->ufAdd[j].fi==getRegistradorFonte1(pipe->busca)){
-                            UFS->ufAdd[i].qj = j;
+                    for(int j=0; j<sizeof(unidadesFuncionais->ufAdd); j++){
+                        if(unidadesFuncionais->ufAdd[j].fi==getRegistradorFonte1(pipe->busca)){
+                            unidadesFuncionais->ufAdd[i].qj = j;
                         }
-                        if( UFS->ufAdd[j].fi==getRegistradorFonte2(pipe->busca)){
-                            UFS->ufAdd[i].qk = j;
+                        if( unidadesFuncionais->ufAdd[j].fi==getRegistradorFonte2(pipe->busca)){
+                            unidadesFuncionais->ufAdd[i].qk = j;
                         }
 
                     }
-                    for(int j=0; j<sizeof(UFS->ufMul); j++){
-                        if(UFS->ufMul[j].fi==getRegistradorFonte1(pipe->busca)){
-                            UFS->ufMul[i].qj = j;
+                    for(int j=0; j<sizeof(unidadesFuncionais->ufMul); j++){
+                        if(unidadesFuncionais->ufMul[j].fi==getRegistradorFonte1(pipe->busca)){
+                            unidadesFuncionais->ufMul[i].qj = j;
                         }
-                        if( UFS->ufMul[j].fi==getRegistradorFonte2(pipe->busca)){
-                            UFS->ufMul[i].qk = j;
-                        }
-                    }
-                    for(int j=0; j<sizeof(UFS->ufInt); j++){
-                        if(UFS->ufInt[j].fi==getRegistradorFonte1(pipe->busca)){
-                            UFS->ufInt[i].qj = j;
-                        }
-                        if( UFS->ufInt[j].fi==getRegistradorFonte2(pipe->busca)){
-                            UFS->ufInt[i].qk = j;
+                        if( unidadesFuncionais->ufMul[j].fi==getRegistradorFonte2(pipe->busca)){
+                            unidadesFuncionais->ufMul[i].qk = j;
                         }
                     }
-                    //UFS->ufAdd[i].fi = getRegistradorDestino(pipe->busca);
+                    for(int j=0; j<sizeof(unidadesFuncionais->ufInt); j++){
+                        if(unidadesFuncionais->ufInt[j].fi==getRegistradorFonte1(pipe->busca)){
+                            unidadesFuncionais->ufInt[i].qj = j;
+                        }
+                        if( unidadesFuncionais->ufInt[j].fi==getRegistradorFonte2(pipe->busca)){
+                            unidadesFuncionais->ufInt[i].qk = j;
+                        }
+                    }
+                    //unidadesFuncionais->ufAdd[i].fi = getRegistradorDestino(pipe->busca);
                 }
             
         }

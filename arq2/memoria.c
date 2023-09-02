@@ -8,8 +8,13 @@ unsigned int *memoria;
 int tam;
 
 void inicializaMemoria(int m){
-    memoria = (unsigned int*)malloc(sizeof(unsigned int) * m);
-    tam=m;
+    if(m<=100){
+        printf("Tamanho de memória insuficiente. O tamanho da memória deve ser mair do que 100. \n");
+    }
+    else{
+        memoria = (unsigned int*)malloc(sizeof(unsigned int) * m);
+        tam=m;
+    }
 }
 
 void printMemoria(){
