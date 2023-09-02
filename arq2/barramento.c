@@ -1,21 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "memoria.h"
-
-#include "tradutor.h"
-#include "common.h"
-
 #include "barramento.h"
 
-unsigned char barramento[4];
+int barramento;
 
-void insereBarramento(unsigned char *value){
-	barramento[0] = value[0];
-	barramento[1] = value[1];
-	barramento[2] = value[2];
-	barramento[3] = value[3];
+void colocaBarramento(int valor){
+    barramento=valor;
 }
-
-unsigned char* fetchBarramento(){
-	return (barramento);
+unsigned int pegaBarramento(int barramento){
+    return barramento;
 }

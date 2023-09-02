@@ -1,17 +1,20 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 #include <stdbool.h>
-#include "processador.h"
+#include "processor.h"
 
-typedef struct {
-    unsigned int busca;
-    unsigned int emissao;
-    unsigned int leitura_op;
-    conjuntoUFS execucao;
-    unsigned int escrita;
-}pipeline;
+pipeline pipe;
 
+void inicializaPipeline(int add, int mul, int inteiro){
+
+    pipe.execucao.ufAdd=(UF*)malloc(sizeof(UF*)*add);
+    pipe.execucao.ufInt=(UF*)malloc(sizeof(UF*)*mul);
+    pipe.execucao.ufMul=(UF*)malloc(sizeof(UF*)*inteiro);
+    pipe.execucao.ufAdd->tipo=0;
+    pipe.execucao.ufMul->tipo=1;
+    pipe.execucao.ufInt->tipo=2;
+
+}
 
 int buscaInstrucao(pipeline pipe, int pc, int barramento){
     colocaBarramento(memoria[pc]);
@@ -49,51 +52,6 @@ unsigned int getRegistradorFonte2(unsigned int instrucao){
     return fonte2;    
 }
 
-tipoUF getUF(unsigned int instrucao){
-    if(getOpcode(instrucao)==0 || getOpcode(instrucao)==1 || getOpcode(instrucao)==2 || getOpcode(instrucao)==3){
-        return ADD;
-    }
-    else if(getOpcode(instrucao)==4 || getOpcode(instrucao)==5){
-        return MUL;
-    }
-    else if(getOpcode(instrucao)==6 || getOpcode(instrucao)==7 || getOpcode(instrucao)==8 || getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
-        return INT;
-    }
-}
-
-int ufDisponivel(pipeline *pipe, tipoUF tipo, conjuntoUFS *UFS){
-    if(tipo==ADD){
-        for(int i=0; i<sizeof(UFS->ufAdd); i++){
-            if(UFS->ufAdd->busy==1){
-                return 0;
-            }
-        }
-    }
-    if(tipo==MUL){
-        for(int i=0; i<sizeof(UFS->ufMul); i++){
-            if(UFS->ufMul->busy==1){
-                return 0;
-            }
-        }
-    }
-    if(tipo==INT){
-        for(int i=0; i<sizeof(UFS->ufInt); i++){
-            if(UFS->ufInt->busy==1){
-                return 0;
-            }
-        }
-    }
-
-    return 1;
-}
-
-int getUFdisponivel(UF *uf){
-    for(int i=0; i<sizeof(uf); i++){
-        if(uf[i].busy == 0){
-            return i;
-        }
-    }
-}
 
 int verificaWAW(pipeline pipe, conjuntoUFS *UFS){
     for(int i=0; i<3; i++){
@@ -147,12 +105,8 @@ int verificaWAW(pipeline pipe, conjuntoUFS *UFS){
     return 1;
 }
 
-/* int UFresultado(int registrador){
-    for(int i=0; i<)
-} */
-
-void emiteInstrucao(pipeline *pipe, conjuntoUFS *UFS){
-    if(verificaWAW(*pipe, UFS) && ufDisponivel(pipe, getUF(pipe->busca), UFS)){
+/* void emiteInstrucao(pipeline *pipe, conjuntoUFS *UFS){
+    if(verificaWAW(*pipe, UFS) && ufDisponivel(getUF(pipe->busca), UFS)){
         tipoUF ufinst = getUF(pipe->busca);
         if(ufinst==ADD){
             int disponivel = getUFdisponivel(UFS->ufAdd);
@@ -199,7 +153,7 @@ void emiteInstrucao(pipeline *pipe, conjuntoUFS *UFS){
                     }
                     //UFS->ufAdd[i].fi = getRegistradorDestino(pipe->busca);
                 }
-            }*/
+            
         }
         pipe->emissao = pipe->busca;
         pipe->busca = 0;
@@ -207,13 +161,13 @@ void emiteInstrucao(pipeline *pipe, conjuntoUFS *UFS){
     else{
         //STALL
     }
-}
+} */
 
 void leituraOperandos(pipeline *pipe){
     pipe->leitura_op = pipe->emissao;
     pipe->emissao = 0;
 }
-
+/* 
 void executaInstrucao(pipeline *pipe){
     tipoUF ufinst = getUF(pipe->leitura_op);
     //PRECISA PROCURAR NA UF ESPAÇO VAZIO
@@ -226,104 +180,4 @@ void executaInstrucao(pipeline *pipe){
             }
         }
     }
-}
-
-
-/* 
-int main(int argc, char *argv[]){
-
-    int m=11;
-    int qtdeAdd = 2;
-    int qtdeMul = 3;
-    int qtdeInt = 1;
-    unsigned int exemploPrograma[10]={50,100,150,200,250,300,350,400,450,500};
-    unsigned int barramento = 0;
-    conjuntoUFS UFS;
-    //leitura do programa FEITO
-
-    //fase de inicializacao FEITA
-    /* A memória tem que ser inicializada
-        As UFS tem que ser inicializadas
-        Banco de registradores
-        Pipeline
-    
-    */
-    //Tem que inicializar o banco com os dados obtidos em .dados
-    //inicializaPipeline(qtdeAdd,qtdeMul,qtdeInt);
-    //inicializaMemoria(m);
-    //inicializaConjuntoUFs(&UFS, qtdeAdd, qtdeMul, qtdeInt);
-    //printUFS(pipe->execucao,8);
-    //imprimeMemoria(m);
-
-    //carrega o programa para a memoria
-    /* for (int i=0; i<sizeof(exemploPrograma)/sizeof(exemploPrograma[0]); i++){
-        insereMemoria(exemploPrograma[i], i);
-    } */
-
-    printMemoria();
-    int clock = 0;
-    //começa a execução do pipeline
-     //while(getOpcode(pipe.busca)!=16){
-        //if(pipe.escrita!=0){
-            //ESCREVER NO REGISTRADOR
-            //exemplo reg[indice]=?
-            //pipe.escrita=0;
-        //}
-    pipe.busca = buscaInstrucao(pipe, pc, barramento);
-    printf("\n\n%u\n\n", pipe.busca);
-    emiteInstrucao(&pipe, &UFS);
-        //Para cada UF, verificar se UF.qtde_ciclos==0 AND não tem WAR
-        //Se já terminou e não tem WAR, pipe.escrita=instrucao q ta na UF
-        //Se não terminou faz UF.qtde_ciclos-1 
-        //Tem muita coisa pra fazer nessa parte pqp 
-
-        /*if(pipe.leitura_op){
-
-
-        
-        }
-
-        if(1/*se tem UF livre){
-            pipe.leitura_op=0;
-            //enfia na execucao
-        }
-        else{
-            //deixa a instrucao lá, ou seja, pipe.leitura_op!=0
-        }
-
-        if(1/*pipe.leitura_op==0 AND //verifica war){
-
-            //manda p pipe.leitura_op
-        }pc++;
-        else{
-            //continua do jeito q ta 
-        }
-
-        /*
-        if(WAW){
-            //nao emite
-            //nao busca a proxima
-        }
-        else{
-            //emite
-            //busca a proxima
-            pipe.busca=memoria[pc];
-        }*/
-        
-        pc++;
-        clock++;
-
-    //} 
-
-
-
-
-    //fim
-    free(memoria);
-
-
-
-
-
-}
- */
+} */

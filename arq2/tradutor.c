@@ -2,24 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "memoria.h"
-#include "common.h"
-int pc=0;
-/* unsigned int *memoria;
-int pc = 0;
-
-void inicializaMemoria(int m){
-    memoria = (unsigned int*)malloc(sizeof(unsigned int) * m);
-}
-
-void insereMemoria(unsigned int instrucao){
-    if(memoria==NULL){
-        printf("Erro.");
-    }
-    else{
-        memoria[pc]=instrucao;
-    }
-}
- */
+#include "tradutor.h"
 
 int getCodigoOpcode(const char opcode[4]) {
 
@@ -61,18 +44,6 @@ int getCodigoOpcode(const char opcode[4]) {
         return -1;
     }
 }
-/*
-unsigned int tradutor(char *buffer){
-    char* token;
-    unsigned int inst=0;
-    token = strtok(buffer, " ");
-    unsigned int codOpcode = getCodigoOpcode(token);
-    unsigned int rs, rd, rt, imm, address;
-    inst = codOpcode << 26;
-
-    if(fscanf(stream, "%s r%d,r%d", &l);)
-}*/
-
 
 
 unsigned int instrucaoParaBinario(char *buffer){
@@ -210,22 +181,3 @@ void printBinario(unsigned int num) {
 
     printf("\n");
 }
-
-/*
-int main(int argc, char *argv[]){
-    FILE* instrucoes;
-    char buffer[256];
-    int memsize = atoi(argv[4]);
-    inicializaMemoria(memsize);
-    instrucoes = fopen("instrucoes.txt", "r");
-    while(fgets(buffer, 256, instrucoes) != 0){
-        unsigned int inst = instrucaoParaBinario(buffer);
-        //printBinario(instrucaoParaBinario(buffer));
-        insereMemoria(inst);
-        pc++;
-    }
-
-    printMemoria(memsize);
-
-    return 0;
-}*/

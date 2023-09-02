@@ -3,6 +3,8 @@
 #include <string.h>
 #include "tradutor.h"
 #include "memoria.h"
+#include "registradores.h"
+#include "main.h"
 
 int getValor(const char *linha) {
     char *separador = strstr(linha, ":");
@@ -14,23 +16,21 @@ int getValor(const char *linha) {
     return 0; // Caso não encontre o separador, retorna 0.
 }
 
-int main(int argc, char *argv[]){
+void leituraArquivo(char * file, int memsize, char * output){
 
-	if((strcmp(argv[1], "-p") == 0) && (strcmp(argv[3], "-m") == 0)){
 		FILE *arquivo;
 	    char buffer[256];
-        int pc = 0;
 	    int ufadd, ufinti, ufmul;
 	    int addCiclos = 0, mulCiclos = 0, lwCiclos = 0, subCiclos=0, divCiclos=0, swCiclos=0, bgtCiclos = 0, jCiclos = 0;
 	    int addiCiclos = 0, subiCiclos = 0, andCiclos = 0, orCiclos = 0, notCiclos = 0, bltCiclos = 0, beqCiclos=0, bneCiclos=0;
 	    // Abre o arquivo em modo de leitura
-	    arquivo = fopen(argv[2], "r");
-	    int memsize = atoi(argv[4]);
+	    arquivo = fopen(file, "r");
+	    //int memsize = atoi(argv[4]);
         inicializaMemoria(memsize);
 	
 	    if (arquivo == NULL) {
 	        printf("Erro ao abrir o arquivo.\n");
-	        return 1;
+	        
 	    }
 	    enum categoria { NENHUMA, UF, INST, PL, DADOS };
     	enum categoria categoria = NENHUMA;
@@ -162,6 +162,7 @@ int main(int argc, char *argv[]){
             		if(categoria == PL){
             			inst = instrucaoParaBinario(buffer);
             			insereMemoria(inst);
+						pc++;
             		}
 				}
 				
@@ -173,22 +174,19 @@ int main(int argc, char *argv[]){
 		
 	    // Fecha o arquivo
 	    fclose(arquivo);
-        printMemoria(memsize);
+        printMemoria();
 	    // Imprime os valores lidos
 	    printf("\n\nUFs - add: %d, mul: %d, int: %d\n\n", ufadd, ufmul, ufinti);
 	    printf("Ciclos de clock necessarios\npara completar a execucao:\nadd: %d, mul: %d, lw: %d\n", addCiclos, mulCiclos, lwCiclos);
         printf("div: %d, and: %d, addi: %d\nsubi: %d, or: %d, not: %d\n", divCiclos, andCiclos, addiCiclos, subiCiclos, orCiclos, notCiclos);
         printf("bgt: %d, blt: %d, beq: %d\nbne: %d, j: %d, sw: %d, sub: %d\n", bgtCiclos, bltCiclos, beqCiclos, bneCiclos, jCiclos, swCiclos, subCiclos);
-	    return 0;
-	}
-	else{
-		printf("Erro na execução do programa. Tente novamente com o formato: ");
-	}
-	if(strcmp(argv[5], "-o") == 0){
+	
+
+	if(output!=NULL){
 		FILE *arq;
-   		printf("Escrevendo os resultados no arquivo %s.txt\n", argv[6]);
-		arq = fopen(argv[6],"w+");
+   		printf("Escrevendo os resultados no arquivo %s.txt\n", output);
+		arq = fopen(output,"w+");
 	}
 
-  return 0;
+  
 }
