@@ -3,6 +3,7 @@
 #include "main.h"
 #include "processor.h"
 #include <string.h>
+#include "scoreboarding.h"
 
 
 int main(int argc, char *argv[]){
@@ -21,11 +22,18 @@ int main(int argc, char *argv[]){
         if(!leituraArquivo(argv[2],atoi(argv[4]),argv[6])){
           return 0;
         }
-        pc = 0;
+        pc = 100;
         clock = 1;
         buscaInstrucao();
         clock++;
         emiteInstrucao();
+        clock++;
+        leituraDeOperandos();
+        clock++;
+        execucao();
+        clock++;
+        execucao();
+        //statusUFs();
     }
     else{
         printf("Erro ao executar o programa.\n");
