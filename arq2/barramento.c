@@ -7,6 +7,7 @@ int barramento;
 void colocaBarramento(int valor){
     barramento=valor;
 }
-unsigned int pegaBarramento(int barramento){
+
+int pegaBarramento(){
     return barramento;
 }
