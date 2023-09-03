@@ -8,7 +8,7 @@ int ir;
 
 void escreverRegistrador(int indice, int valor){
     bancoRegs[indice] = valor;
-};
+}
 
 int lerRegistrador(int indice){
     return bancoRegs[indice];
