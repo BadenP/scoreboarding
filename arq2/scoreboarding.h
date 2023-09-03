@@ -1,10 +1,8 @@
 #ifndef SCOREBOARDING_H
 #define SCOREBOARDING_H
 
-//void statusInstrucoes();
 void statusRegistradores();
 void statusUFs();
-extern statusInstrucoes statusI;
 
 typedef struct{
     int instrucao;
@@ -14,5 +12,9 @@ typedef struct{
     int execucao;
     int escrita;
 }statusInstrucoes;
+
+extern statusInstrucoes *statusI;
+
+void inicializaStatusInstrucoes();
 
 #endif
