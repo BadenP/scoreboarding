@@ -6,8 +6,13 @@
 #include "registradores.h"
 #include "main.h"
 #include "unidade_funcional.h"
+#include "scoreboarding.h"
 
 int ciclosParaExecutar[16];
+int clock;
+int qtdeAdd, qtdeInt, qtdeMul;
+int addCiclos, mulCiclos, lwCiclos, subCiclos, divCiclos, swCiclos, bgtCiclos, jCiclos;
+int addiCiclos, subiCiclos, andCiclos, orCiclos, notCiclos, bltCiclos, beqCiclos, bneCiclos;
 
 int getValor(const char *linha) {
     char *separador = strstr(linha, ":");
@@ -19,17 +24,19 @@ int getValor(const char *linha) {
     return 0; // Caso não encontre o separador, retorna 0.
 }
 
-void leituraArquivo(char * file, int memsize, char * output){
-
+int leituraArquivo(char * file, int memsize, char * output){
+//AQUI AINDA PRECISA FAZER COM QUE # SEJA ACEITO COMO UM COMENTÁRIO NO CÓDIGO
 		FILE *arquivo;
 	    char buffer[256];
-	    int ufadd, ufinti, ufmul;
 	    int addCiclos = 0, mulCiclos = 0, lwCiclos = 0, subCiclos=0, divCiclos=0, swCiclos=0, bgtCiclos = 0, jCiclos = 0;
 	    int addiCiclos = 0, subiCiclos = 0, andCiclos = 0, orCiclos = 0, notCiclos = 0, bltCiclos = 0, beqCiclos=0, bneCiclos=0;
+		int dado;
+		char *endptr;
 	    // Abre o arquivo em modo de leitura
 	    arquivo = fopen(file, "r");
 	    //int memsize = atoi(argv[4]);
         inicializaMemoria(memsize);
+		inicializaStatusInstrucoes();
 		//inicializaUFS(ufadd, ufinti, ufmul);
 	
 	    if (arquivo == NULL) {
@@ -59,6 +66,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 			}
 			else if(strcmp(buffer, ". text\n") == 0 || strcmp(buffer, ". text\n") == 0){
 				categoria = PL;
+				pc = 100;
 			}
 		    else if(strcmp(buffer, "*/\n") == 0){
 		    	categoria = NENHUMA;
@@ -76,7 +84,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 	            	else if (strstr(buffer, "add")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == UF)
-	                    	ufadd = valor; //QUANTIDADE DE UF ADD
+	                    	qtdeAdd = valor; //QUANTIDADE DE UF ADD
 	                	else if (categoria == INST)
 	                    	addCiclos = valor; //QUANTIDADE DE CICLOS DA ADD
 							ciclosParaExecutar[0]=addCiclos;
@@ -84,7 +92,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 					else if (strstr(buffer, "mul")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == UF)
-	                    	ufmul = valor; //QUANTIDADE DE UF MUL
+	                    	qtdeMul = valor; //QUANTIDADE DE UF MUL
 	                	else if (categoria == INST)
 	                    	mulCiclos = valor; //QUANTIDADE DE CICLOS DA MUL
 							ciclosParaExecutar[4]=mulCiclos;
@@ -92,7 +100,7 @@ void leituraArquivo(char * file, int memsize, char * output){
 					else if (strstr(buffer, "int")) {
 	                	valor = getValor(buffer);
 	                	if (categoria == UF)
-	                   	 	ufinti = valor; //QUANTIDADE DE UF INTEGER
+	                   	 	qtdeInt = valor; //QUANTIDADE DE UF INTEGER
 	            	}
 	            	else if (strstr(buffer, "div")) {
 	                	valor = getValor(buffer);
@@ -174,7 +182,12 @@ void leituraArquivo(char * file, int memsize, char * output){
 	            	}
 	            }
 	            else if (categoria == DADOS){
-	            	printf("\nDADOS");
+					dado = strtol(buffer, &endptr, 10);
+					if (*endptr != '\0' && *endptr != '\n') {
+        				printf("Erro na conversão da string para long int.\n");
+    				}
+	            	insereMemoria(dado);
+					pc = pc + 4;
 				}
 	            
             	else{
@@ -182,7 +195,8 @@ void leituraArquivo(char * file, int memsize, char * output){
             		if(categoria == PL){
             			inst = instrucaoParaBinario(buffer);
             			insereMemoria(inst);
-						pc++;
+						pc = pc+4;
+						qtdeInsts++;
             		}
 				}
 				
@@ -195,18 +209,26 @@ void leituraArquivo(char * file, int memsize, char * output){
 	    // Fecha o arquivo
 	    fclose(arquivo);
         printMemoria();
+		if((memsize-100)<qtdeInsts*4){
+			printf("\nERRO: Não há espaço na memória para todas as instruções do programa.\n");
+			return 0;
+		}
 	    // Imprime os valores lidos
-	    printf("\n\nUFs - add: %d, mul: %d, int: %d\n\n", ufadd, ufmul, ufinti);
+	    printf("\n\nUFs - add: %d, mul: %d, int: %d\n\n", qtdeAdd, qtdeMul, qtdeInt);
 	    printf("Ciclos de clock necessarios\npara completar a execucao:\nadd: %d, mul: %d, lw: %d\n", addCiclos, mulCiclos, lwCiclos);
         printf("div: %d, and: %d, addi: %d\nsubi: %d, or: %d, not: %d\n", divCiclos, andCiclos, addiCiclos, subiCiclos, orCiclos, notCiclos);
         printf("bgt: %d, blt: %d, beq: %d\nbne: %d, j: %d, sw: %d, sub: %d\n", bgtCiclos, bltCiclos, beqCiclos, bneCiclos, jCiclos, swCiclos, subCiclos);
-		inicializaPipeline();
+		//inicializaPipeline();
+		printf("\n\nREGISTRADORES:\n");
+		for(int j=0; j<32; j++){
+			printf("\nr%d = %d", j, bancoRegs[j]);
+		}
+
 
 	if(output!=NULL){
 		FILE *arq;
-   		printf("Escrevendo os resultados no arquivo %s.txt\n", output);
+   		//printf("Escrevendo os resultados no arquivo %s.txt\n", output);
 		arq = fopen(output,"w+");
 	}
 
-  
 }
