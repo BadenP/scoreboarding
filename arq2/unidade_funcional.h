@@ -8,7 +8,7 @@ typedef enum { ADD, MUL, INT } tipoUF;
 
 typedef struct UF {
     tipoUF tipo;
-    bool busy;
+    int busy;
     unsigned int operacao;
     unsigned int fi;
     unsigned int fj;
@@ -32,7 +32,7 @@ extern conjuntoUFS unidadesFuncionais;
 
 void printConjuntoUFS(conjuntoUFS* conjunto);
 void printUF(UF* uf);
-void inicializaConjuntoUFs(conjuntoUFS* UFS, int add, int mul, int inteiro);
+void inicializaUFs(int add, int mul, int inteiro);
 int getUFdisponivel(int tipo);
 int ufDisponivel(tipoUF tipo, conjuntoUFS *UFS);
 int getTipoUF(unsigned int instrucao);
