@@ -6,6 +6,17 @@ unsigned int bancoRegs[32];
 int pc=0;
 int ir;
 
+void printRegistradores(){
+    printf("\n\nREGISTRADORES:\n");
+	for(int j=0; j<32; j++){
+		printf("r%d = %d ", j, bancoRegs[j]);
+        if(j%4==0 && j!=0){
+            printf("\n");
+        }
+	}
+    printf("\n");
+}
+
 void escreverRegistrador(int indice, int valor){
     bancoRegs[indice] = valor;
 }
