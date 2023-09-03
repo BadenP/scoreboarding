@@ -2,8 +2,9 @@
 #define BARRAMENTO_H_
 
 extern int barramento;
+
 void colocaBarramento(int valor);
-unsigned int pegaBarramento(int barramento);
+int pegaBarramento();
 
 
 #endif
