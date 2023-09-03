@@ -28,8 +28,6 @@ int leituraArquivo(char * file, int memsize, char * output){
 //AQUI AINDA PRECISA FAZER COM QUE # SEJA ACEITO COMO UM COMENTÁRIO NO CÓDIGO
 		FILE *arquivo;
 	    char buffer[256];
-	    int addCiclos = 0, mulCiclos = 0, lwCiclos = 0, subCiclos=0, divCiclos=0, swCiclos=0, bgtCiclos = 0, jCiclos = 0;
-	    int addiCiclos = 0, subiCiclos = 0, andCiclos = 0, orCiclos = 0, notCiclos = 0, bltCiclos = 0, beqCiclos=0, bneCiclos=0;
 		int dado;
 		char *endptr;
 	    // Abre o arquivo em modo de leitura
@@ -37,7 +35,6 @@ int leituraArquivo(char * file, int memsize, char * output){
 	    //int memsize = atoi(argv[4]);
         inicializaMemoria(memsize);
 		inicializaStatusInstrucoes();
-		//inicializaUFS(ufadd, ufinti, ufmul);
 	
 	    if (arquivo == NULL) {
 	        printf("Erro ao abrir o arquivo.\n");
@@ -206,6 +203,7 @@ int leituraArquivo(char * file, int memsize, char * output){
 			}
 		} 
 		
+		inicializaUFs(qtdeAdd, qtdeMul, qtdeInt);
 	    // Fecha o arquivo
 	    fclose(arquivo);
         printMemoria();
@@ -219,16 +217,12 @@ int leituraArquivo(char * file, int memsize, char * output){
         printf("div: %d, and: %d, addi: %d\nsubi: %d, or: %d, not: %d\n", divCiclos, andCiclos, addiCiclos, subiCiclos, orCiclos, notCiclos);
         printf("bgt: %d, blt: %d, beq: %d\nbne: %d, j: %d, sw: %d, sub: %d\n", bgtCiclos, bltCiclos, beqCiclos, bneCiclos, jCiclos, swCiclos, subCiclos);
 		//inicializaPipeline();
-		printf("\n\nREGISTRADORES:\n");
-		for(int j=0; j<32; j++){
-			printf("\nr%d = %d", j, bancoRegs[j]);
-		}
-
+		printRegistradores();
 
 	if(output!=NULL){
 		FILE *arq;
    		//printf("Escrevendo os resultados no arquivo %s.txt\n", output);
 		arq = fopen(output,"w+");
 	}
-
+	return 1;
 }
