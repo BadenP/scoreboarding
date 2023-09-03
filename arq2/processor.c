@@ -11,6 +11,7 @@ void buscaInstrucao(){
     colocaBarramento(memoria[pc]);
     ir = pegaBarramento();
     statusI[pc].busca = clock;
+    printf("\n%d", ir);
 }
 
 unsigned int getOpcode(unsigned int instrucao){
@@ -150,10 +151,26 @@ void executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
     }
     else if(opcode==10){
-
+        if(bancoRegs[fonte1]>bancoRegs[fonte2]){
+            pc = pc + 4 + destino;
+        }
     }
+    else if(opcode==11){
+        if(bancoRegs[fonte1]==bancoRegs[fonte2]){
+            pc = pc + 4 + destino;
+        }
+    }
+    else if(opcode==12){
+        if(bancoRegs[fonte1]!=bancoRegs[fonte2]){
+            pc = pc + 4 + destino;
+        }
+    }
+    //SALTO INCONDICIONAL (OPCODE 13) TEM QUE SER VISTO NA BUSCAAAAAAAAAA
     else if(opcode==14){
         bancoRegs[destino] = memoria[bancoRegs[fonte1] + fonte2];
+    }
+    else if(opcode==15){
+        memoria[bancoRegs[fonte1] + fonte2] = bancoRegs[destino];
     }
 }
 
@@ -169,46 +186,47 @@ void emiteInstrucao(){
     int disponivel = getUFdisponivel(tipoUF_inst);
     if(vetorResultados[regDestino] == 0 && disponivel!=-1){
         if(tipoUF_inst==ADD){
-            unidadesFuncionais.ufAdd[disponivel].busy = true;
+            unidadesFuncionais.ufAdd[disponivel].busy = 1;
             unidadesFuncionais.ufAdd[disponivel].fi = bancoRegs[regDestino];
             unidadesFuncionais.ufAdd[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufAdd[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
             unidadesFuncionais.ufAdd[disponivel].operacao = getOpcode(ir);
             unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufAdd[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
-            unidadesFuncionais.ufAdd[disponivel].rj = 0;
-            unidadesFuncionais.ufAdd[disponivel].rk = 0;
+            unidadesFuncionais.ufAdd[disponivel].rj = (unidadesFuncionais.ufAdd[disponivel].qj == 0);
+            unidadesFuncionais.ufAdd[disponivel].rk = (unidadesFuncionais.ufAdd[disponivel].qk == 0);
             unidadesFuncionais.ufAdd[disponivel].qtde_ciclos = -1;
             vetorResultados[regDestino] = &unidadesFuncionais.ufAdd[disponivel];
         }
         if(tipoUF_inst==MUL){
-            unidadesFuncionais.ufMul[disponivel].busy = true;
+            unidadesFuncionais.ufMul[disponivel].busy = 1;
             unidadesFuncionais.ufMul[disponivel].fi = bancoRegs[regDestino];
             unidadesFuncionais.ufMul[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufMul[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
             unidadesFuncionais.ufMul[disponivel].operacao = getOpcode(ir);
             unidadesFuncionais.ufMul[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufMul[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
-            unidadesFuncionais.ufMul[disponivel].rj = 0;
-            unidadesFuncionais.ufMul[disponivel].rk = 0;
+            unidadesFuncionais.ufMul[disponivel].rj = (unidadesFuncionais.ufMul[disponivel].qj == 0);
+            unidadesFuncionais.ufMul[disponivel].rk = (unidadesFuncionais.ufMul[disponivel].qk == 0);
             unidadesFuncionais.ufMul[disponivel].qtde_ciclos = -1;
             vetorResultados[regDestino] = &unidadesFuncionais.ufMul[disponivel];
         }
         if(tipoUF_inst==INT){
-            unidadesFuncionais.ufInt[disponivel].busy = true;
+            unidadesFuncionais.ufInt[disponivel].busy = 1;
             unidadesFuncionais.ufInt[disponivel].fi = bancoRegs[regDestino];
             unidadesFuncionais.ufInt[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufInt[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
             unidadesFuncionais.ufInt[disponivel].operacao = getOpcode(ir);
             unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
             unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
-            unidadesFuncionais.ufInt[disponivel].rj = 0;
-            unidadesFuncionais.ufInt[disponivel].rk = 0;
+            unidadesFuncionais.ufInt[disponivel].rj = (unidadesFuncionais.ufInt[disponivel].qj == 0);
+            unidadesFuncionais.ufInt[disponivel].rk = (unidadesFuncionais.ufInt[disponivel].qk == 0);
             unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
             vetorResultados[regDestino] = &unidadesFuncionais.ufInt[disponivel];
         }
         ir = 0;
         statusI[pc].emissao = clock;
+        //printf("\n%d\n", statusI[pc].emissao);
     }
     else{
         printf("\nNAO FOI POSSIVEL EMITIR A INSTRUCAO\n\n");
@@ -231,10 +249,12 @@ void leituraDeOperandos(){
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
-        if(unidadesFuncionais.ufInt[i].rj == 1 && unidadesFuncionais.ufInt[i].rk == 1){
+        if(unidadesFuncionais.ufInt[i].rj == 1 && unidadesFuncionais.ufInt[i].rk == 1 && unidadesFuncionais.ufInt[i].busy == 1){
             unidadesFuncionais.ufInt[i].rj == 0;
             unidadesFuncionais.ufInt[i].rk == 0;
             unidadesFuncionais.ufInt[i].qtde_ciclos = getCiclos(unidadesFuncionais.ufInt[i].operacao);
+            printf("\n%d", unidadesFuncionais.ufInt[i].qtde_ciclos);
+            printf("\n\nLEU");
         }
     }
 }
@@ -265,6 +285,16 @@ void execucao(){
         else if(unidadesFuncionais.ufInt[i].qtde_ciclos==0){
             executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
 
+        }
+    }
+}
+
+void escritaResultados(){
+    for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
+        for(int j=0; j<unidadesFuncionais.qtdeMUL; j++){
+            if((unidadesFuncionais.ufAdd[i].fi!=unidadesFuncionais.ufMul[j].fj)){
+                
+            }
         }
     }
 }
