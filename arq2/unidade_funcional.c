@@ -43,10 +43,22 @@ void printUFS(UF* ufs, int qtde){
 }
 
 
-void inicializaUFs(int add, int inter, int mul){
+void inicializaUFs(int add, int mul, int inter){
     unidadesFuncionais.ufAdd = (UF*)malloc(sizeof(UF*)*add);
     unidadesFuncionais.ufInt = (UF*)malloc(sizeof(UF*)*inter);
     unidadesFuncionais.ufMul = (UF*)malloc(sizeof(UF*)*mul);
+    unidadesFuncionais.qtdeADD = add;
+    unidadesFuncionais.qtdeINT = inter;
+    unidadesFuncionais.qtdeMUL = mul;
+    for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
+        unidadesFuncionais.ufAdd[i].qtde_ciclos = -1;
+    }
+    for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
+        unidadesFuncionais.ufMul[i].qtde_ciclos = -1;
+    }
+    for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
+        unidadesFuncionais.ufInt[i].qtde_ciclos = -1;
+    }
 }
 
 /* int getUFdisponivel(UF *uf){
@@ -58,23 +70,23 @@ void inicializaUFs(int add, int inter, int mul){
 } */
 
 int getUFdisponivel(int tipo){
-    if(tipo==ADD){
+    if(tipo==0){
         for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
-            if(unidadesFuncionais.ufAdd[i].busy==false){
+            if(unidadesFuncionais.ufAdd[i].busy==0){
                 return i;
             }
         }
     }
-    if(tipo==MUL){
+    if(tipo==1){
         for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
-            if(unidadesFuncionais.ufAdd[i].busy==false){
+            if(unidadesFuncionais.ufAdd[i].busy==0){
                 return i;
             }
         }
     }
-    if(tipo==INT){
+    if(tipo==2){
         for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
-            if(unidadesFuncionais.ufAdd[i].busy==false){
+            if(unidadesFuncionais.ufAdd[i].busy==0){
                 return i;
             }
         }
