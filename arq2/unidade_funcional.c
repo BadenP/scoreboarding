@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "unidade_funcional.h"
+#include "processor.h"
+#include "main.h"
 #include <stdbool.h>
 
 conjuntoUFS unidadesFuncionais;
+UF *vetorResultados[32];
 
 const char* tipoToString(tipoUF tipo) {
     switch (tipo) {
@@ -54,7 +57,7 @@ void inicializaUFs(int add, int inter, int mul){
     }
 } */
 
-int getUFDisponivel(tipoUF tipo){
+int getUFdisponivel(int tipo){
     if(tipo==ADD){
         for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
             if(unidadesFuncionais.ufAdd[i].busy==false){
@@ -80,7 +83,11 @@ int getUFDisponivel(tipoUF tipo){
     return -1;
 }
 
-tipoUF getTipoUF(unsigned int instrucao){
+int UFresultado(){
+
+}
+
+int getTipoUF(unsigned int instrucao){
     if(getOpcode(instrucao)==0 || getOpcode(instrucao)==1 || getOpcode(instrucao)==2 || getOpcode(instrucao)==3){
         return ADD;
     }
