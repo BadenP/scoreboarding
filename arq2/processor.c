@@ -2,13 +2,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "processor.h"
+#include "registradores.h"
+#include "unidade_funcional.h"
+#include "scoreboarding.h"
+#include "main.h"
 
-pipeline pipe;
-
-int buscaInstrucao(pipeline pipe, int pc, int barramento){
+void buscaInstrucao(){
     colocaBarramento(memoria[pc]);
-    pipe.busca = pegaBarramento(barramento);
-    return pipe.busca;
+    ir = pegaBarramento();
+    statusI[pc].busca = clock;
 }
 
 unsigned int getOpcode(unsigned int instrucao){
@@ -16,12 +18,18 @@ unsigned int getOpcode(unsigned int instrucao){
     return codOpcode;
 } 
 
+//PARA AS INSTRUCOES DE LOAD E STORE:::: RT É DESTINO, IMM É FONTE1 E R2 É FONTE2
+
+//PARA INSTRUÇÕES DE SALTO O DESTINO FOI UTILIZADO PARA ARMAZENAR O IMM
 unsigned int getRegistradorDestino(unsigned int instrucao){
     unsigned int destino;
     if(getOpcode(instrucao)==0 || getOpcode(instrucao)==2 || getOpcode(instrucao)==4 || getOpcode(instrucao)==5 || getOpcode(instrucao)==6 || getOpcode(instrucao)==7 || getOpcode(instrucao)==8){
         destino = (instrucao >> 11) & 0x1F;
     }
-    else if(getOpcode(instrucao)==1 || getOpcode(instrucao)==3 || getOpcode(instrucao)==14){
+    else if(getOpcode(instrucao)==1 || getOpcode(instrucao)==3 || getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
+        destino = (instrucao >> 16) & 0x1F;
+    }
+    else if(getOpcode(instrucao)==9 || getOpcode(instrucao)==10 || getOpcode(instrucao)==11 || getOpcode(instrucao)==12 || getOpcode(instrucao)==13){
         destino = (instrucao >> 16) & 0x1F;
     }
     return destino;    
@@ -29,96 +37,234 @@ unsigned int getRegistradorDestino(unsigned int instrucao){
 
 unsigned int getRegistradorFonte1(unsigned int instrucao){
     unsigned int fonte1;
-    if(getOpcode(instrucao)!=13 && getOpcode(instrucao)!=15 && getOpcode(instrucao)!=16)
+    if(getOpcode(instrucao)!=13 && getOpcode(instrucao)!=14 && getOpcode(instrucao)!=15 && getOpcode(instrucao)!=16)
         fonte1 = (instrucao >> 21) & 0x1F;
+    else if(getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
+        fonte1 = instrucao & 0xFFFF;
+    }
     return fonte1;    
 } 
 
 unsigned int getRegistradorFonte2(unsigned int instrucao){
     unsigned int fonte2;
-    if(getOpcode(instrucao)!=1 && getOpcode(instrucao)!=3 && getOpcode(instrucao)!=8 && getOpcode(instrucao)!=13 && getOpcode(instrucao)!=14)
+    if(getOpcode(instrucao)!=1 && getOpcode(instrucao)!=3 && getOpcode(instrucao)!=8 && getOpcode(instrucao)!=13 && getOpcode(instrucao)!=14 && getOpcode(instrucao)!=15)
         fonte2 = (instrucao >> 16) & 0x1F;
+    else if(getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
+        fonte2 = (instrucao >> 21) && 0x1F;
+    }
     return fonte2;    
 }
 
 
+//SÓ PRA RETORNAR A QUANTIDADE DE CICLOS QUE A INSTRUCAO VAI LEVAR PRA EXECUTAR
+int getCiclos(int opcode){
+    if(opcode==0){
+        return addCiclos;
+    }
+    else if(opcode==1){
+        return addiCiclos;
+    }
+    else if(opcode==2){
+        return subCiclos;
+    }
+    else if(opcode==3){
+        return subiCiclos;
+    }
+    else if(opcode==4){
+        return mulCiclos;
+    }
+    else if(opcode==5){
+        return divCiclos;
+    }
+    else if(opcode==6){
+        return andCiclos;
+    }
+    else if(opcode==7){
+        return orCiclos;
+    }
+    else if(opcode==8){
+        return notCiclos;
+    }
+    else if(opcode==9){
+        return bltCiclos;
+    }
+    else if(opcode==10){
+        return bgtCiclos;
+    }
+    else if(opcode==11){
+        return beqCiclos;
+    }
+    else if(opcode==12){
+        return bneCiclos;
+    }
+    else if(opcode==13){
+        return jCiclos;
+    }
+    else if(opcode==14){
+        return lwCiclos;
+    }
+    else if(opcode==15){
+        return swCiclos;
+    }
+}
 
+//EXECUTA DE FATO AS OPERACOESSSSSSSS
+
+//PROVAVEL QUE TENHA QUE ARREDONDAR OS VALORES QUANDO É DIV OU MUL PQ O ANDERSON DISSE QUE NAO VAMOS TRABALHAR COM FLOAT
+
+//NAO SEI SE A OPERACAO NOT SÓ ALTERA O SINAL DO NUMERO OU DA TIPO UM COMPLEMENTO (???) DELE
+
+//NOS SALTOS RS E RT SÃO FONTE1 E FONTE2 RESPECTIVAMENTE MAS AINDA PRECISO RESOLVER O IMM
+//PQ NAO SEI ONDE ARMAZENO (PROVAVELMENTE NO DESTINO)
+void executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
+    if(opcode==0){
+        bancoRegs[destino] = bancoRegs[fonte1] + bancoRegs[fonte2];
+    }
+    else if(opcode==1){
+        bancoRegs[destino] = bancoRegs[fonte1] + fonte2;
+    }
+    else if(opcode==2){
+        bancoRegs[destino] = bancoRegs[fonte1] - bancoRegs[fonte2];
+    }
+    else if(opcode==3){
+        bancoRegs[destino] = bancoRegs[fonte1] - fonte2;
+    }
+    else if(opcode==4){
+        bancoRegs[destino] = bancoRegs[fonte1] * bancoRegs[fonte2];
+    }
+    else if(opcode==5){
+        bancoRegs[destino] = bancoRegs[fonte1] / bancoRegs[fonte2];
+    }
+    else if(opcode==6){
+        bancoRegs[destino] = bancoRegs[fonte1] & bancoRegs[fonte2];
+    }
+    else if(opcode==7){
+        bancoRegs[destino] = bancoRegs[fonte1] | bancoRegs[fonte2];
+    }
+    else if(opcode==8){
+        bancoRegs[destino] = -1 * bancoRegs[fonte1];
+    }
+    else if(opcode==9){
+        if(bancoRegs[fonte1]<bancoRegs[fonte2]){
+            pc = pc + 4 + destino;
+        }
+    }
+    else if(opcode==10){
+
+    }
+    else if(opcode==14){
+        bancoRegs[destino] = memoria[bancoRegs[fonte1] + fonte2];
+    }
+}
+
+
+
+//DEPOIS DE JOGAR AS INSTRUCOES PRA UF EU COLOCO OS DADOS E FAÇO A QUANTIDADE DE CICLOS = -1 
+//PRA SINALIZAR QUE A LEITURA DE OPERANDOS AINDA NAO FOI FEITA E A EXECUCAO AINDA NAO PODE COMECAR
+
+//DUVIDAS:::: DEPOIS DOS RESULTADOS ESTAREM PRONTOS QJ E QK ANULA?; NAO SEI DIREITO AINDA COMO VAI FUNCIONAR O VETORRESULTADOS
 void emiteInstrucao(){
-    int regDestino = getRegistradorDestino(pipe.busca);
-    tipoUF tipoUF_inst = getTipoUF(pipe.busca);
-    int disponivel = getUFDisponivel(tipoUF_inst);
-    if(regDestino!=vetorResultados[regDestino].fi && disponivel!=-1){
+    int regDestino = getRegistradorDestino(ir);
+    int tipoUF_inst = getTipoUF(ir);
+    int disponivel = getUFdisponivel(tipoUF_inst);
+    if(vetorResultados[regDestino] == 0 && disponivel!=-1){
         if(tipoUF_inst==ADD){
             unidadesFuncionais.ufAdd[disponivel].busy = true;
-            unidadesFuncionais.ufAdd[disponivel].fi = getRegistradorDestino(pipe.busca);
-            unidadesFuncionais.ufAdd[disponivel].fj = getValor(getRegistradorFonte1(pipe.busca));
-            unidadesFuncionais.ufAdd[disponivel].fk = getValor(getRegistradorFonte2(pipe.busca));
-            unidadesFuncionais.ufAdd[disponivel].operacao = getOpcode(pipe.busca);
-            unidadesFuncionais.ufAdd[disponivel].qj = UFresultado(getRegistradorFonte1(pipe.busca));
-            unidadesFuncionais.ufAdd[disponivel].qk = UFresultado(getRegistradorFonte2(pipe.busca));
-
-            pipe.emissao=pipe.busca;
-            //ACHO QUE NAO PRECISA DE TUDO ISSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-            /*
-            for(int i=0; i<sizeof(unidadesFuncionais->ufAdd); i++){
-                if(unidadesFuncionais->ufAdd[i].busy==0){
-                    unidadesFuncionais->ufAdd[i].busy = 1;
-                    //VERIFICAR SE O VALOR A SER ESCRITO JÁ ESTÁ PRONTO
-                    //PRA FAZER ISSO BASTA VERIFICAR SE O REGISTRADOR É DESTINO DE ALGUMA OPERACAO NAS unidadesFuncionais
-                    //AO INVÉS DE SIZEOF TEM QUE USAR O TAMANHO DA UF QUE FOI PASSADO COMO PARAMETRO
-                    //PROBLEMA AQUI::: SABER QUAL FOI O ÚLTIMO A ENTRAR NO PIPELINE
-                    for(int j=0; j<sizeof(unidadesFuncionais->ufAdd); j++){
-                        if(unidadesFuncionais->ufAdd[j].fi==getRegistradorFonte1(pipe->busca)){
-                            unidadesFuncionais->ufAdd[i].qj = j;
-                        }
-                        if( unidadesFuncionais->ufAdd[j].fi==getRegistradorFonte2(pipe->busca)){
-                            unidadesFuncionais->ufAdd[i].qk = j;
-                        }
-
-                    }
-                    for(int j=0; j<sizeof(unidadesFuncionais->ufMul); j++){
-                        if(unidadesFuncionais->ufMul[j].fi==getRegistradorFonte1(pipe->busca)){
-                            unidadesFuncionais->ufMul[i].qj = j;
-                        }
-                        if( unidadesFuncionais->ufMul[j].fi==getRegistradorFonte2(pipe->busca)){
-                            unidadesFuncionais->ufMul[i].qk = j;
-                        }
-                    }
-                    for(int j=0; j<sizeof(unidadesFuncionais->ufInt); j++){
-                        if(unidadesFuncionais->ufInt[j].fi==getRegistradorFonte1(pipe->busca)){
-                            unidadesFuncionais->ufInt[i].qj = j;
-                        }
-                        if( unidadesFuncionais->ufInt[j].fi==getRegistradorFonte2(pipe->busca)){
-                            unidadesFuncionais->ufInt[i].qk = j;
-                        }
-                    }
-                    //unidadesFuncionais->ufAdd[i].fi = getRegistradorDestino(pipe->busca);
-                }
-            
+            unidadesFuncionais.ufAdd[disponivel].fi = bancoRegs[regDestino];
+            unidadesFuncionais.ufAdd[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufAdd[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufAdd[disponivel].operacao = getOpcode(ir);
+            unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufAdd[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufAdd[disponivel].rj = 0;
+            unidadesFuncionais.ufAdd[disponivel].rk = 0;
+            unidadesFuncionais.ufAdd[disponivel].qtde_ciclos = -1;
+            vetorResultados[regDestino] = &unidadesFuncionais.ufAdd[disponivel];
         }
-        pipe->emissao = pipe->busca;
-        pipe->busca = 0;
+        if(tipoUF_inst==MUL){
+            unidadesFuncionais.ufMul[disponivel].busy = true;
+            unidadesFuncionais.ufMul[disponivel].fi = bancoRegs[regDestino];
+            unidadesFuncionais.ufMul[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufMul[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufMul[disponivel].operacao = getOpcode(ir);
+            unidadesFuncionais.ufMul[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufMul[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufMul[disponivel].rj = 0;
+            unidadesFuncionais.ufMul[disponivel].rk = 0;
+            unidadesFuncionais.ufMul[disponivel].qtde_ciclos = -1;
+            vetorResultados[regDestino] = &unidadesFuncionais.ufMul[disponivel];
+        }
+        if(tipoUF_inst==INT){
+            unidadesFuncionais.ufInt[disponivel].busy = true;
+            unidadesFuncionais.ufInt[disponivel].fi = bancoRegs[regDestino];
+            unidadesFuncionais.ufInt[disponivel].fj = bancoRegs[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufInt[disponivel].fk = bancoRegs[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufInt[disponivel].operacao = getOpcode(ir);
+            unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+            unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+            unidadesFuncionais.ufInt[disponivel].rj = 0;
+            unidadesFuncionais.ufInt[disponivel].rk = 0;
+            unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
+            vetorResultados[regDestino] = &unidadesFuncionais.ufInt[disponivel];
+        }
+        ir = 0;
+        statusI[pc].emissao = clock;
     }
     else{
-        //STALL
+        printf("\nNAO FOI POSSIVEL EMITIR A INSTRUCAO\n\n");
     }
-} */
-
-void leituraOperandos(pipeline *pipe){
-    pipe->leitura_op = pipe->emissao;
-    pipe->emissao = 0;
 }
-/* 
-void executaInstrucao(pipeline *pipe){
-    tipoUF ufinst = getUF(pipe->leitura_op);
-    //PRECISA PROCURAR NA UF ESPAÇO VAZIO
-    if(ufinst==ADD){
-        //AO INVÉS DE SIZEOF TEM QUE USAR O TAMANHO DA UF QUE FOI PASSADO COMO PARAMETRO
-        for(int i=0; i<sizeof(pipe->execucao.ufAdd); i++){
-            if(pipe->execucao.ufAdd[i].busy == 0){
-                //pipe->execucao.ufAdd[i].
-                return;
-            }
+
+void leituraDeOperandos(){
+    for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
+        if(unidadesFuncionais.ufAdd[i].rj == 1 && unidadesFuncionais.ufAdd[i].rk == 1){
+            unidadesFuncionais.ufAdd[i].rj == 0;
+            unidadesFuncionais.ufAdd[i].rk == 0;
+            unidadesFuncionais.ufAdd[i].qtde_ciclos = getCiclos(unidadesFuncionais.ufAdd[i].operacao); 
         }
     }
-} */
+    for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
+        if(unidadesFuncionais.ufMul[i].rj == 1 && unidadesFuncionais.ufMul[i].rk == 1){
+            unidadesFuncionais.ufMul[i].rj == 0;
+            unidadesFuncionais.ufMul[i].rk == 0;
+            unidadesFuncionais.ufMul[i].qtde_ciclos = getCiclos(unidadesFuncionais.ufMul[i].operacao);
+        }
+    }
+    for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
+        if(unidadesFuncionais.ufInt[i].rj == 1 && unidadesFuncionais.ufInt[i].rk == 1){
+            unidadesFuncionais.ufInt[i].rj == 0;
+            unidadesFuncionais.ufInt[i].rk == 0;
+            unidadesFuncionais.ufInt[i].qtde_ciclos = getCiclos(unidadesFuncionais.ufInt[i].operacao);
+        }
+    }
+}
+
+void execucao(){
+    for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
+        if(unidadesFuncionais.ufAdd[i].qtde_ciclos!=0 && unidadesFuncionais.ufAdd[i].qtde_ciclos!=-1){
+            unidadesFuncionais.ufAdd[i].qtde_ciclos--;
+        }
+        else if(unidadesFuncionais.ufAdd[i].qtde_ciclos==0){
+            executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao);
+            
+        }
+    }
+    for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
+        if(unidadesFuncionais.ufMul[i].qtde_ciclos!=0 && unidadesFuncionais.ufMul[i].qtde_ciclos!=-1){
+            unidadesFuncionais.ufMul[i].qtde_ciclos--;
+        }
+        else if(unidadesFuncionais.ufMul[i].qtde_ciclos==0){
+            executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
+
+        }
+    }
+    for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
+        if(unidadesFuncionais.ufInt[i].qtde_ciclos!=0 && unidadesFuncionais.ufInt[i].qtde_ciclos!=-1){
+            unidadesFuncionais.ufInt[i].qtde_ciclos--;
+        }
+        else if(unidadesFuncionais.ufInt[i].qtde_ciclos==0){
+            executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
+
+        }
+    }
+}
