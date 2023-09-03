@@ -6,8 +6,10 @@
 
 extern unsigned int bancoRegs[32];
 extern int pc;
+extern int ir;
 
 void escreverRegistrador();
-void lerRegistrador();
+int lerRegistrador();
+void armazenarValorRegistrador(const char *linha, int tamanho);
 
 #endif 
