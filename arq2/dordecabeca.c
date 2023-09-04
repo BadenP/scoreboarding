@@ -60,7 +60,7 @@ int emite(){
 
 int main(){
 
-    while(getOpcode(busca())!=17){
+    while(getOpcode(busca())!=16){
 
         busca();
         emite();

@@ -7,15 +7,16 @@
 #include "registradores.h"
 #include "memoria.h"
 
-void inicializaPipeline(int add, int mul, int inteiro);
-unsigned int getOpcode(unsigned int instrucao);
-unsigned int getRegistradorDestino(unsigned int instrucao);
-unsigned int getRegistradorFonte1(unsigned int instrucao);
-unsigned int getRegistradorFonte2(unsigned int instrucao);
+int getOpcode(int instrucao);
+int getRegistradorDestino(int instrucao);
+int getRegistradorFonte1(int instrucao);
+int getRegistradorFonte2(int instrucao);
+int getImm(int instrucao);
 void emiteInstrucao();
 void buscaInstrucao();
 void leituraDeOperandos();
 void execucao();
 void executaInstrucao(int destino, int fonte1, int fonte2, int opcode);
+void escritaResultados();
 
 #endif 

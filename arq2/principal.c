@@ -22,8 +22,22 @@ int main(int argc, char *argv[]){
         if(!leituraArquivo(argv[2],atoi(argv[4]),argv[6])){
           return 0;
         }
+        
         pc = 100;
-        clock = 1;
+        clocki = 1;
+        stalled = 0;
+        for(clocki=1; clocki<8; clocki++){
+          printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
+          escritaResultados();
+          execucao();
+          leituraDeOperandos();
+          emiteInstrucao();
+          buscaInstrucao();
+          printf("\nPC = %d\nIR = %d", pc, ir);
+          while (getchar() != '\n') {
+          }
+        }
+        /*
         buscaInstrucao();
         clock++;
         emiteInstrucao();
@@ -33,11 +47,19 @@ int main(int argc, char *argv[]){
         execucao();
         clock++;
         execucao();
+        clock++;
+        execucao();
+        clock++;
+        escritaResultados();
+        */
         //statusUFs();
     }
     else{
         printf("Erro ao executar o programa.\n");
     }
-
+  free(memoria);
+  //free(unidadesFuncionais.ufAdd);
+  //free(unidadesFuncionais.ufInt);
+  //free(unidadesFuncionais.ufMul);
   return 0;
 }

@@ -11,5 +11,6 @@ extern int ir;
 void escreverRegistrador();
 int lerRegistrador();
 void armazenarValorRegistrador(const char *linha, int tamanho);
+void printRegistradores();
 
 #endif 

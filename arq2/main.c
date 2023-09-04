@@ -9,7 +9,9 @@
 #include "scoreboarding.h"
 
 int ciclosParaExecutar[16];
-int clock;
+int clocki;
+int stalled;
+int bufferEscrita[32];
 int qtdeAdd, qtdeInt, qtdeMul;
 int addCiclos, mulCiclos, lwCiclos, subCiclos, divCiclos, swCiclos, bgtCiclos, jCiclos;
 int addiCiclos, subiCiclos, andCiclos, orCiclos, notCiclos, bltCiclos, beqCiclos, bneCiclos;
@@ -29,7 +31,6 @@ int leituraArquivo(char * file, int memsize, char * output){
 		FILE *arquivo;
 	    char buffer[256];
 		int dado;
-		char *endptr;
 	    // Abre o arquivo em modo de leitura
 	    arquivo = fopen(file, "r");
 	    //int memsize = atoi(argv[4]);
@@ -179,10 +180,7 @@ int leituraArquivo(char * file, int memsize, char * output){
 	            	}
 	            }
 	            else if (categoria == DADOS){
-					dado = strtol(buffer, &endptr, 10);
-					if (*endptr != '\0' && *endptr != '\n') {
-        				printf("Erro na conversão da string para long int.\n");
-    				}
+					dado = atoi(buffer);
 	            	insereMemoria(dado);
 					pc = pc + 4;
 				}

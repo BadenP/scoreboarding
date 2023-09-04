@@ -3,9 +3,9 @@
 
 extern int qtdeInsts;
 extern int tam;
-extern long int *memoria;
+extern int *memoria;
 void inicializaMemoria(int m);
-void insereMemoria(long int instrucao);
+void insereMemoria(int instrucao);
 void printMemoria();
 
 #endif

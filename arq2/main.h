@@ -2,7 +2,9 @@
 #define MAIN_H
 
 extern int ciclosParaExecutar[16];
-extern int clock;
+extern int clocki;
+extern int stalled;
+extern int bufferEscrita[32];
 extern int qtdeAdd, qtdeInt, qtdeMul;
 extern int addCiclos, mulCiclos, lwCiclos, subCiclos, divCiclos, swCiclos, bgtCiclos, jCiclos;
 extern int addiCiclos, subiCiclos, andCiclos, orCiclos, notCiclos, bltCiclos, beqCiclos, bneCiclos;
