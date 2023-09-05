@@ -1,0 +1,35 @@
+/*
+UF
+add: 3
+mul : 3
+inteiro :3
+INST
+add : 2
+addi:1
+sub:1
+subi:2 
+mul: 10
+div:4
+and:3
+or:2
+not:3
+blt:2
+bgt:4
+beq:5
+bne:6
+j:4
+lw:2
+sw:2
+*/
+. data
+3
+4
+-20
+450
+211
+. text
+lw r1, 4(r0)
+add r2, r4, r1
+add r3, r5, r1
+addi r6, r7, 9
+exit

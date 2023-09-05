@@ -2,9 +2,9 @@
 UF
 add: 5
 mul : 8
-int :4
+inteiro :2
 INST
-add : 3
+add : 2
 addi:1
 sub:1
 subi:2 
@@ -28,8 +28,9 @@ sw:2
 450
 211
 . text
-lw r1, r4(0)
-add r1, r1, r2
+lw r1, 4(r0)
+lw r2, 8(r0)
+add r4, r1, r2
 addi r5,r6,9
 sub r11, r12, r29
 blt r1, r3, 5
@@ -48,5 +49,4 @@ j 45
 bgt r4,r3, 8
 blt r2, r3, 100
 lw r9,100(r31)
-sw r20,30(r1)
 exit

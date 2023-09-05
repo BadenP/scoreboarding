@@ -75,11 +75,11 @@ unsigned int instrucaoParaBinario(char *buffer){
             arg2 = strtok(NULL, "r ,");
             arg3 = strtok(NULL, "r \r\n");
             //printf("\n%s ", token);
-            rs=atoi(arg1);
+            rd=atoi(arg1);
             //printf("%s ", arg1);
-            rt=atoi(arg2);
+            rs=atoi(arg2);
             //printf("%s ", arg2);
-            rd=atoi(arg3);
+            rt=atoi(arg3);
             //printf("%s ", arg3);
             rs = rs << 21;
             inst = inst | rs;
@@ -122,9 +122,9 @@ unsigned int instrucaoParaBinario(char *buffer){
             arg2 = strtok(NULL, "r ,");
             arg3 = strtok(NULL, ", \r\n");
             //printf("\n%s ", token);
-            rs=atoi(arg1);
+            rt=atoi(arg1);
             //printf("%s ", arg1);
-            rt=atoi(arg2);
+            rs=atoi(arg2);
             //printf("%s ", arg2);
             imm=atoi(arg3);
             //printf("%s ", arg3);
