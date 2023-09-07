@@ -15,6 +15,7 @@ int buscaInstrucao(){
         colocaBarramento(memoria[pc]);
         ir = pegaBarramento();
         statusI[((pc%100)/4)].busca = clocki;
+        printf("\nOPCODE: %d", getOpcode(ir));
         if(getOpcode(ir)==13){
             pc = getImm(ir);
         }
@@ -33,7 +34,9 @@ int buscaInstrucao(){
     }
     else{
         printf("\nSTALL");
+        return 0;
     }
+    return 1;
     printf("\n---------------------\n");
 }
 
@@ -54,7 +57,7 @@ int getRegistradorDestino(int instrucao){
         destino = (instrucao >> 16) & 0x1F;
     }
     else if(getOpcode(instrucao)==9 || getOpcode(instrucao)==10 || getOpcode(instrucao)==11 || getOpcode(instrucao)==12 || getOpcode(instrucao)==13){
-        destino = (instrucao >> 16) & 0x1F;
+        destino = (instrucao >> 0) & 0xFFFF;
     }
     //printf("\nDESTINO: %d", destino);
     return destino;    
@@ -77,6 +80,9 @@ int getRegistradorFonte2(int instrucao){
         fonte2 = (instrucao >> 16) & 0x1F;
     else if(getOpcode(instrucao)==14 || getOpcode(instrucao)==15){
         fonte2 = (instrucao >> 21) & 0x1F;
+    }
+    else if(getOpcode(instrucao)==1 || getOpcode(instrucao)==3){
+        fonte2 = (instrucao >> 0) & 0xFFFF;
     }
     //printf("\nFONTE2: %d", fonte2);
     return fonte2;    
@@ -290,7 +296,8 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
             //pc = pc + 4 + destino;
             int valor = pc + 4 + destino;
             destino=32;
-            resultado = destino << 26;
+            destino = destino << 26;
+            resultado = resultado | destino;
             if(valor!= abs(valor)){
                 int sinal = 1;
                 sinal = sinal << 25;
@@ -303,11 +310,13 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
     }
     else if(opcode==10){
+        printf("\nSALTO: if(%d > %d): pc = %d", bancoRegs[fonte1], bancoRegs[fonte2], pc+destino+4);
         if(bancoRegs[fonte1]>bancoRegs[fonte2]){
             //pc = pc + 4 + destino;
             int valor = pc + 4 + destino;
             destino=32;
-            resultado = destino << 26;
+            destino = destino << 26;
+            resultado = resultado | destino;
             if(valor!= abs(valor)){
                 int sinal = 1;
                 sinal = sinal << 25;
@@ -323,7 +332,8 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
             //pc = pc + 4 + destino;
             int valor = pc + 4 + destino;
             destino=32;
-            resultado = destino << 26;
+            destino = destino << 26;
+            resultado = resultado | destino;
             if(valor!= abs(valor)){
                 int sinal = 1;
                 sinal = sinal << 25;
@@ -339,7 +349,8 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
             //pc = pc + 4 + destino;
             int valor = pc + 4 + destino;
             destino=32;
-            resultado = destino << 26;
+            destino = destino << 26;
+            resultado = resultado | destino;
             if(valor!= abs(valor)){
                 int sinal = 1;
                 sinal = sinal << 25;
@@ -373,27 +384,29 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         int valor = bancoRegs[destino];
         int endereco = bancoRegs[fonte1] + fonte2;
         destino = 33;
-        resultado = destino << 26;
+        destino = destino << 26;
+        resultado = resultado | destino;
         endereco = endereco << 25;
         resultado = resultado | endereco;
-            if(valor!= abs(valor)){
-                int sinal = 1;
-                sinal = sinal << 15;
-                resultado = resultado | sinal;
-            }	
-            valor = abs(valor) << 0;
-            resultado = resultado | valor;
-            return resultado;
+        if(valor!= abs(valor)){
+            int sinal = 1;
+            sinal = sinal << 15;
+            resultado = resultado | sinal;
+        }	
+        valor = abs(valor) << 0;
+        resultado = resultado | valor;
+        return resultado;
     }
 }
 
 void escreveNoDestino(int resultado){
-     int mascara_destino = 0xFC000000; // 11111100000000000000000000000000 em binário
+    //int mascara_destino = 0xFC000000; // 11111100000000000000000000000000 em binário
     // Extrai os 6 bits mais significativos (destino)
     int bits_destino = (resultado >> 26) & 0x3F;
     //printf("\n\nbits destino: %d", bits_destino);
     // Limpa os 6 bits mais significativos do resultado (obtendo o "resto")
-    int resto = resultado & ~mascara_destino;
+    int resto = resultado & 0x1FFFFFF;
+    printf("\n\nDESTINO = %d, RESTO = %d", bits_destino, resto);
 
     if (bits_destino>=0 && bits_destino<=31){
         printf("INSERINDO %d em REGISTRADOR %d\n",resto,bits_destino);
@@ -445,7 +458,6 @@ void emiteInstrucao(){
                 unidadesFuncionais.ufAdd[disponivel].operacao = getOpcode(ir);
                 unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
                 unidadesFuncionais.ufAdd[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
-                //printf("\n\nQk: %p\n\n", unidadesFuncionais.ufAdd[disponivel].qk);
                 unidadesFuncionais.ufAdd[disponivel].rj = (unidadesFuncionais.ufAdd[disponivel].qj == 0);
                 unidadesFuncionais.ufAdd[disponivel].rk = (unidadesFuncionais.ufAdd[disponivel].qk == 0);
                 unidadesFuncionais.ufAdd[disponivel].qtde_ciclos = -1;
@@ -477,15 +489,16 @@ void emiteInstrucao(){
                 unidadesFuncionais.ufInt[disponivel].rj = (unidadesFuncionais.ufInt[disponivel].qj == NULL);
                 unidadesFuncionais.ufInt[disponivel].rk = (unidadesFuncionais.ufInt[disponivel].qk == NULL);
                 unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
+                printf("\n\nFi: %d, Fj: %d, Fk: %d\n\n", unidadesFuncionais.ufInt[disponivel].fi, unidadesFuncionais.ufInt[disponivel].fj, unidadesFuncionais.ufInt[disponivel].fk);
                 //printf("\nAAAAAAAAAAAAAA\n");
                 //printf("FI: %d", unidadesFuncionais.ufInt[disponivel].fi);
-                vetorResultados[regDestino] = &unidadesFuncionais.ufInt[disponivel];
+                if(unidadesFuncionais.ufInt[disponivel].operacao<9 || unidadesFuncionais.ufInt[disponivel].operacao>13)
+                    vetorResultados[regDestino] = &unidadesFuncionais.ufInt[disponivel];
             }
             printf("\nEMITIU %d", ir);
-            instrucoesEmitidas++;
             statusI[getIndiceInstrucao(ir)].emissao = clocki;
             ir = 0;
-            stalled = 0;
+            instrucoesEmitidas++;
             //printf("\n%d\n", statusI[pc].emissao);
         }
         else{
@@ -502,7 +515,7 @@ void emiteInstrucao(){
 void leituraDeOperandos(){
     printf("\n-------------------LEITURA OPS------------------\n");
     for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
-        printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
+        //printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
         if(unidadesFuncionais.ufAdd[i].rj == 1 && unidadesFuncionais.ufAdd[i].rk == 1){
             unidadesFuncionais.ufAdd[i].rj = 0;
             unidadesFuncionais.ufAdd[i].rk = 0;
@@ -552,6 +565,7 @@ void execucao(){
             //possiveis exemplos: bits resultado e bits para registrador ou pc ou memoria 
             //se for registrador, é de 0 a 31, se for pc pode ser 32 e memoria 33 ou qualquer outra coisa q kiser decidir 
             colocaBarramentoResultados(resultado);
+            printf("\nRESULTADOOOOO: %d", resultado);
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
@@ -570,10 +584,6 @@ void execucao(){
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
-        if(i==0){
-            //printf("\nAAAAAAAAAAAAAAAAA");
-            //printf("FI: %d, FJ: %d, FK: %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
-        }
         if(unidadesFuncionais.ufInt[i].qtde_ciclos!=0 && unidadesFuncionais.ufInt[i].qtde_ciclos!=-1){
             if(statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucao==0){
                 statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucao=clocki;
@@ -581,15 +591,11 @@ void execucao(){
             unidadesFuncionais.ufInt[i].qtde_ciclos--;
             printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
         }
-        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0 && unidadesFuncionais.ufInt[i].fj!=0 && unidadesFuncionais.ufInt[i].fk!=0)){
+        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0 || unidadesFuncionais.ufInt[i].fj!=0 || unidadesFuncionais.ufInt[i].fk!=0)){
             //executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
-            if(i==0){
-                //printf("\nAAAAAAAAAAAAAAAAA");
-                //printf("FI: %d, FJ: %d, FK: %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
-            }
             //unidadesFuncionais.ufInt[i].qtde_ciclos = 0;
             int resultado = executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
-            printf("\nresultado: %d", resultado);
+            printf("\nRESULTADOOOOO: %d", resultado);
             colocaBarramentoResultados(resultado);
             printf("\nBARRAMENTO RESULTS: %d", barramentoResultados);
 
@@ -654,21 +660,21 @@ void escritaResultados(){
             }
             if(checkAddA && checkAddB && checkAddC && unidadesFuncionais.ufAdd[i].qtde_ciclos == 0 &&
             (unidadesFuncionais.ufAdd[i].fi != 0 && unidadesFuncionais.ufAdd[i].fj != 0 && unidadesFuncionais.ufAdd[i].fk !=0)){
-                vetorResultados[unidadesFuncionais.ufAdd[i].fi] = 0;
-                //printf("FI: %d; FJ: %d, FK: %d", unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk);
-                //executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao);
-                escreveNoDestino(pegaBarramentoResultados());
-                statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].escrita=clocki;
-                unidadesFuncionais.ufAdd[i].instrucao=0;
-                unidadesFuncionais.ufAdd[i].busy = 0;
-                unidadesFuncionais.ufAdd[i].fi = 0;
-                unidadesFuncionais.ufAdd[i].fj = 0;
-                unidadesFuncionais.ufAdd[i].fk = 0;
-                unidadesFuncionais.ufAdd[i].operacao = 0;
-                unidadesFuncionais.ufAdd[i].qj = NULL;
-                unidadesFuncionais.ufAdd[i].qk = NULL;
-                unidadesFuncionais.ufAdd[i].rj = 0;
-                instrucoesEfetivadas++;
+                if(pegaBarramentoResultados()==executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao)){
+                    vetorResultados[unidadesFuncionais.ufAdd[i].fi] = 0;
+                    escreveNoDestino(pegaBarramentoResultados());
+                    statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].escrita=clocki;
+                    unidadesFuncionais.ufAdd[i].instrucao=0;
+                    unidadesFuncionais.ufAdd[i].busy = 0;
+                    unidadesFuncionais.ufAdd[i].fi = 0;
+                    unidadesFuncionais.ufAdd[i].fj = 0;
+                    unidadesFuncionais.ufAdd[i].fk = 0;
+                    unidadesFuncionais.ufAdd[i].operacao = 0;
+                    unidadesFuncionais.ufAdd[i].qj = NULL;
+                    unidadesFuncionais.ufAdd[i].qk = NULL;
+                    unidadesFuncionais.ufAdd[i].rj = 0;
+                    instrucoesEfetivadas++;
+                }
             }
         }
         checkAddA = 1;
@@ -723,20 +729,21 @@ void escritaResultados(){
         }
         if(checkMulA && checkMulB && checkMulC && unidadesFuncionais.ufMul[i].qtde_ciclos == 0 &&
         (unidadesFuncionais.ufMul[i].fi != 0 && unidadesFuncionais.ufMul[i].fj != 0 && unidadesFuncionais.ufMul[i].fk !=0)){
-            vetorResultados[unidadesFuncionais.ufMul[i].fi] = 0;
-            //executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
-            escreveNoDestino(pegaBarramentoResultados());
-            statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].escrita=clocki;
-            unidadesFuncionais.ufMul[i].instrucao=0;
-            unidadesFuncionais.ufMul[i].busy = 0;
-            unidadesFuncionais.ufMul[i].fi = 0;
-            unidadesFuncionais.ufMul[i].fj = 0;
-            unidadesFuncionais.ufMul[i].fk = 0;
-            unidadesFuncionais.ufMul[i].operacao = 0;
-            unidadesFuncionais.ufMul[i].qj = NULL;
-            unidadesFuncionais.ufMul[i].qk = NULL;
-            unidadesFuncionais.ufMul[i].rj = 0;
-            instrucoesEfetivadas++;
+            if(pegaBarramentoResultados()==executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao)){
+                vetorResultados[unidadesFuncionais.ufMul[i].fi] = 0;
+                escreveNoDestino(pegaBarramentoResultados());
+                statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].escrita=clocki;
+                unidadesFuncionais.ufMul[i].instrucao=0;
+                unidadesFuncionais.ufMul[i].busy = 0;
+                unidadesFuncionais.ufMul[i].fi = 0;
+                unidadesFuncionais.ufMul[i].fj = 0;
+                unidadesFuncionais.ufMul[i].fk = 0;
+                unidadesFuncionais.ufMul[i].operacao = 0;
+                unidadesFuncionais.ufMul[i].qj = NULL;
+                unidadesFuncionais.ufMul[i].qk = NULL;
+                unidadesFuncionais.ufMul[i].rj = 0;
+                instrucoesEfetivadas++;
+            }
         }
         checkMulA = 1;
         checkMulB = 1;
@@ -798,22 +805,27 @@ void escritaResultados(){
                 if((unidadesFuncionais.ufInt[i].fi == 0 && unidadesFuncionais.ufInt[i].fj == 0 && unidadesFuncionais.ufInt[i].fk ==0)){
                 }
                 else{
-                    //printf("\n\nCHECK %d, %d, %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
-                    vetorResultados[unidadesFuncionais.ufInt[i].fi] = 0;
-                    //executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
-                    //printf("\n BARRAMENTO: %d", pegaBarramento());
-                    escreveNoDestino(pegaBarramentoResultados());
-                    statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].escrita=clocki;
-                    unidadesFuncionais.ufInt[i].instrucao=0;
-                    unidadesFuncionais.ufInt[i].busy = 0;
-                    unidadesFuncionais.ufInt[i].fi = 0;
-                    unidadesFuncionais.ufInt[i].fj = 0;
-                    unidadesFuncionais.ufInt[i].fk = 0;
-                    unidadesFuncionais.ufInt[i].operacao = 0;
-                    unidadesFuncionais.ufInt[i].qj = NULL;
-                    unidadesFuncionais.ufInt[i].qk = NULL;
-                    unidadesFuncionais.ufInt[i].rj = 0;
-                    instrucoesEfetivadas++;
+                    printf("\n\n%d", pegaBarramentoResultados());
+                    if(pegaBarramentoResultados()==executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao)){
+                        if(unidadesFuncionais.ufInt[i].operacao<9 || unidadesFuncionais.ufInt[i].operacao>13){
+                            vetorResultados[unidadesFuncionais.ufInt[i].fi] = 0;
+                        }
+                        else{
+                            stalled = 0;
+                        }
+                        escreveNoDestino(pegaBarramentoResultados());
+                        statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].escrita=clocki;
+                        unidadesFuncionais.ufInt[i].instrucao=0;
+                        unidadesFuncionais.ufInt[i].busy = 0;
+                        unidadesFuncionais.ufInt[i].fi = 0;
+                        unidadesFuncionais.ufInt[i].fj = 0;
+                        unidadesFuncionais.ufInt[i].fk = 0;
+                        unidadesFuncionais.ufInt[i].operacao = 0;
+                        unidadesFuncionais.ufInt[i].qj = NULL;
+                        unidadesFuncionais.ufInt[i].qk = NULL;
+                        unidadesFuncionais.ufInt[i].rj = 0;
+                        instrucoesEfetivadas++;
+                    }
                 }
             }
         }

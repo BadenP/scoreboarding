@@ -54,7 +54,7 @@ int instrucaoParaBinario(char *buffer){
     int rs, rd, rt, imm, address;
     inst = codOpcode << 26;
 
-    if(codOpcode<9 && (codOpcode!=1 && codOpcode !=3)){
+    if(codOpcode<9){
         if (codOpcode == 8){
             char* arg1,*arg2;
             arg1 = strtok(NULL, "r ,");
@@ -69,7 +69,7 @@ int instrucaoParaBinario(char *buffer){
             rd = rd << 11;
             inst = inst | rd;
         }
-        else{
+        else if(codOpcode!=1 && codOpcode !=3){
             char* arg1,*arg2,*arg3;
             arg1 = strtok(NULL, "r ,");
             arg2 = strtok(NULL, "r ,");
@@ -87,6 +87,30 @@ int instrucaoParaBinario(char *buffer){
             inst = inst | rt;
             rd = rd << 11;
             inst = inst | rd;
+        }
+        else{
+            char* arg1,*arg2,*arg3;
+            arg1 = strtok(NULL, "r ,");
+            arg2 = strtok(NULL, "r ,");
+            arg3 = strtok(NULL, ", \r\n");
+            //printf("\n%s ", token);
+            rt=atoi(arg1);
+            //printf("%s ", arg1);
+            rs=atoi(arg2);
+            //printf("%s ", arg2);
+            imm=atoi(arg3);
+            //printf("%s ", arg3);
+            rs = rs << 21;
+            inst = inst | rs;
+            rt = rt << 16;
+            inst = inst | rt;
+            if(imm != abs(imm)){
+                int sinal = 1;
+                sinal = sinal << 15;
+                inst = inst | sinal;
+            }	
+            imm = abs(imm) << 0;
+            inst = inst | imm;
         }
     }
     else if(codOpcode==16 || codOpcode==13){
@@ -122,9 +146,9 @@ int instrucaoParaBinario(char *buffer){
             arg2 = strtok(NULL, "r ,");
             arg3 = strtok(NULL, ", \r\n");
             //printf("\n%s ", token);
-            rt=atoi(arg1);
+            rs=atoi(arg1);
             //printf("%s ", arg1);
-            rs=atoi(arg2);
+            rt=atoi(arg2);
             //printf("%s ", arg2);
             imm=atoi(arg3);
             //printf("%s ", arg3);

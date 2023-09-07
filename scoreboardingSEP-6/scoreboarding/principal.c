@@ -26,13 +26,14 @@ int main(int argc, char *argv[]){
         pc = 100;
         clocki = 1;
         stalled = 0;
-        while(instrucoesEmitidas == 0 || instrucoesEmitidas!=instrucoesEfetivadas){
+        int cont;
+        do{
           printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
           escritaResultados();
           execucao();
           leituraDeOperandos();
           emiteInstrucao();
-          buscaInstrucao();
+          cont = buscaInstrucao();
           printf("\nPC = %d\nIR = %d", pc, ir);
           clocki++;
           printStatusInstrucoes();
@@ -42,7 +43,7 @@ int main(int argc, char *argv[]){
           printf("\nBARRAMENTO RESULTS: %d", barramentoResultados);
           while (getchar() != '\n') {
           }
-        }
+        }while((instrucoesEmitidas == 0 || instrucoesEmitidas!=instrucoesEfetivadas) || cont);
         printf("\n\nFIM DO PROGRAMA\n");
         /*
         buscaInstrucao();
