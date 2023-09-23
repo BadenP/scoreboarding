@@ -15,6 +15,25 @@ void inicializaVetorForwarding(){
     vetorForwarding = (int*)malloc(sizeof(int)*qtdeInsts);
 }
 
+void aumentaVetorForwarding(){
+    int *newVetorForwarding = (int*)malloc(sizeof(int)*instsBuscadas+1);
+    if (newVetorForwarding == NULL) {   
+        printf("Erro na alocação de memória.\n");
+        free(newVetorForwarding); // Liberar memória alocada para o vetor original
+    }
+    for (int i = 0; i < instsBuscadas-1; i++) {
+        newVetorForwarding[i] = vetorForwarding[i];
+    }
+    //newStatusI[instsBuscadas-1].instrucao = memoria[pc];
+    free(vetorForwarding);
+    vetorForwarding = (int*)malloc(sizeof(int)*(instsBuscadas+1));
+    for (int i = 0; i < instsBuscadas-1; i++) {
+        vetorForwarding[i] = newVetorForwarding[i];
+    }
+    //statusI[instsBuscadas-1].instrucao = memoria[pc];
+    free(newVetorForwarding);
+}
+
 int instsBuscadas;
 int qtdeloops;
 
@@ -29,6 +48,7 @@ int buscaInstrucao(){
 
         if(instsBuscadas>qtdeInsts-1){
             aumentaStatusInstrucoes();
+            aumentaVetorForwarding();
             printf("AUMENTOU\n");
             statusI[instsBuscadas-1].instrucao = ir;
         }

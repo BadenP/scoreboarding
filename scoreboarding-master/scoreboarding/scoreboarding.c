@@ -12,7 +12,7 @@ statusInstrucoes *statusI;
 
 
 void inicializaStatusInstrucoes(){
-    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*qtdeInsts-1);
+    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*qtdeInsts-2);
     int j=0;
     int i=400;
     for(j=0; j<qtdeInsts-1; j++){
@@ -24,17 +24,17 @@ void inicializaStatusInstrucoes(){
 }
 
 void aumentaStatusInstrucoes(){
-    statusInstrucoes *newStatusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*(instsBuscadas));
+    statusInstrucoes *newStatusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*(instsBuscadas+1));
     if (newStatusI == NULL) {   
         printf("Erro na alocação de memória.\n");
-        //free(newStatusI); // Liberar memória alocada para o vetor original
+        free(newStatusI); // Liberar memória alocada para o vetor original
     }
     for (int i = 0; i < instsBuscadas-1; i++) {
         newStatusI[i] = statusI[i];
     }
-        //newStatusI[instsBuscadas-1].instrucao = memoria[pc];
+    //newStatusI[instsBuscadas-1].instrucao = memoria[pc];
     free(statusI);
-    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*(instsBuscadas));
+    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*(instsBuscadas+1));
     for (int i = 0; i < instsBuscadas-1; i++) {
         statusI[i] = newStatusI[i];
     }

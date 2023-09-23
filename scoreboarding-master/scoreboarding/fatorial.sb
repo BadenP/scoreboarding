@@ -22,7 +22,7 @@ lw:2
 sw:2
 */
 . data
-5
+7
 . text
 lw r1, 0(r0)
 lw r2, 0(r0)
