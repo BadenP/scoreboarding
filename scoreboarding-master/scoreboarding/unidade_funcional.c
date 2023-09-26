@@ -8,6 +8,12 @@
 conjuntoUFS unidadesFuncionais;
 UF *vetorResultados[32];
 
+/* void printStatusReg(){
+    for(int i=0; i<32; i++){
+        printf()
+    }
+} */
+
 const char* tipoToString(tipoUF tipo) {
     switch (tipo) {
         case ADD:

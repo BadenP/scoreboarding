@@ -19,5 +19,6 @@ void aumentaStatusInstrucoes();
 void printStatusInstrucoes();
 void inicializaStatusInstrucoes();
 int getIndiceInstrucao(int instrucao);
+void printStatusReg();
 
 #endif

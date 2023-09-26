@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
         int cont;
         if(arq_saida){
           do{
-            printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
+            //printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
             escritaResultados();
             execucao();
             leituraDeOperandos();
@@ -58,14 +58,15 @@ int main(int argc, char *argv[]){
             clocki++;
             printStatusInstrucoes();
             statusUFs();
-            printRegistradores();
+            printStatusReg();
+            //printRegistradores();
             //printMemoria();
-            printBarramentoResultados();
+            //printBarramentoResultados();
           }while((instrucoesEmitidas == 0 || instrucoesEmitidas!=instrucoesEfetivadas) || cont);
         }
         else{
           do{
-            printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
+            //printf("\n--------CICLO %d--------\nPressione enter para continuar\n", clocki);
             escritaResultados();
             execucao();
             leituraDeOperandos();
@@ -75,14 +76,16 @@ int main(int argc, char *argv[]){
             clocki++;
             printStatusInstrucoes();
             statusUFs();
-            printRegistradores();
+            printStatusReg();
+            //printRegistradores();
             //printMemoria();
-            printBarramentoResultados();
+            //printBarramentoResultados();
             while (getchar() != '\n') {
             }
           }while((instrucoesEmitidas == 0 || instrucoesEmitidas!=instrucoesEfetivadas) || cont);
         }
         printf("\n\nFIM DO PROGRAMA\n");
+        printRegistradores();
         /*
         buscaInstrucao();
         clock++;

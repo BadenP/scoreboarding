@@ -1,0 +1,60 @@
+/*
+UF
+add: 5
+mul : 8
+inteiro :5
+INST
+add : 2
+addi:1
+sub:1
+subi:2 
+mul: 10
+div:4
+and:3
+or:2
+not:3
+blt:2
+bgt:4
+beq:5
+bne:6
+j:4
+lw:2
+sw:2
+*/
+.data
+3
+4
+-20
+450
+211
+121
+31
+42
+-2
+10
+-11
+83
+11
+2
+.text
+lw r1, 32(r0)     
+lw r3, 52(r0)
+lw r4, 56(r0)
+add r5, r2, r3
+div r5, r5, r4
+subi r7, r5, 1
+addi r20, r0, 4
+mul r7, r7, r20
+lw r8, 0(r7)
+beq r8, r1, 24
+bgt r8, r1, 4 
+blt r8, r1, 8
+add r2, r5, r0
+j 412
+add r3, r5, r0
+j 412
+add r30, r1, r0
+add r31, r5, r0
+beq r0, r21, 4
+subi r31, r0, 1
+exit

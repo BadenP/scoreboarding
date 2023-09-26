@@ -227,6 +227,179 @@ void statusUFs(){
     }
 }
 
+void printStatusReg(){
+    printf("\n\n");
+    char* nomeUF;
+    int j;
+
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+    
+    
+    for (int i = 0; i<11; i++) {
+        printf("|%-5sR%d%-5s","",i,"");
+
+    }
+    printf("|");
+    printf("\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+
+    for(int i=0; i<11; i++){
+
+        if(vetorResultados[i]!=NULL){
+            if(vetorResultados[i]->tipo==0){
+                nomeUF = "ADD";
+                for(j=0; j<unidadesFuncionais.qtdeADD; j++){
+                    if(unidadesFuncionais.ufAdd[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==1){
+                nomeUF = "MUL";
+                for(j=0; j<unidadesFuncionais.qtdeMUL; j++){
+                    if(unidadesFuncionais.ufMul[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==2){
+                nomeUF = "INT";
+                for(j=0; j<unidadesFuncionais.qtdeINT; j++){
+                    if(unidadesFuncionais.ufInt[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+        }
+        else{
+            nomeUF = "-";
+            printf("|%-5s%s%-6s","",nomeUF,"");
+        }
+        
+
+    }
+    printf("|");
+    printf("\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+    
+    for (int i =11; i<22; i++) {
+        printf("|%-5sR%d%-4s","",i,"");
+
+    }
+    printf("|");
+    printf("\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+
+    for(int i=11; i<22; i++){
+
+        if(vetorResultados[i]!=NULL){
+            if(vetorResultados[i]->tipo==0){
+                nomeUF = "ADD";
+                for(j=0; j<unidadesFuncionais.qtdeADD; j++){
+                    if(unidadesFuncionais.ufAdd[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==1){
+                nomeUF = "MUL";
+                for(j=0; j<unidadesFuncionais.qtdeMUL; j++){
+                    if(unidadesFuncionais.ufMul[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==2){
+                nomeUF = "INT";
+                for(j=0; j<unidadesFuncionais.qtdeINT; j++){
+                    if(unidadesFuncionais.ufInt[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+        }
+        else{
+            nomeUF = "-";
+            printf("|%-5s%s%-6s","",nomeUF,"");
+        }
+        
+
+    }
+
+    printf("|");
+    printf("\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+    
+    for (int i =22; i<32; i++) {
+        printf("|%-5sR%d%-4s","",i,"");
+
+    }
+    printf("|");
+    printf("\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+
+    for(int i=22; i<32; i++){
+
+        if(vetorResultados[i]!=NULL){
+            if(vetorResultados[i]->tipo==0){
+                nomeUF = "ADD";
+                for(j=0; j<unidadesFuncionais.qtdeADD; j++){
+                    if(unidadesFuncionais.ufAdd[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==1){
+                nomeUF = "MUL";
+                for(j=0; j<unidadesFuncionais.qtdeMUL; j++){
+                    if(unidadesFuncionais.ufMul[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+
+                    }
+                }
+            }
+            else if(vetorResultados[i]->tipo==2){
+                nomeUF = "INT";
+                for(j=0; j<unidadesFuncionais.qtdeINT; j++){
+                    if(unidadesFuncionais.ufInt[j].fi==i){
+                        printf("|%-4s%s%d%-4s","",nomeUF,j,"");
+
+                    }
+                }
+            }
+        }
+        else{
+            nomeUF = "-";
+            printf("|%-5s%s%-6s","",nomeUF,"");
+        }
+        
+
+    }
+    printf("|\n");
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+}
+
+
 
 
 

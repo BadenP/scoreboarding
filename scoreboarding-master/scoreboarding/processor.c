@@ -38,9 +38,9 @@ int instsBuscadas;
 int qtdeloops;
 
 int buscaInstrucao(){
-    printf("\n-------------BUSCA--------------\n");
+    //printf("\n-------------BUSCA--------------\n");
     if(!stalled){
-        printf("AAAAAA");
+        //printf("AAAAAA");
         instsBuscadas++;
         //printf("\nMEM: %d", memoria[pc]);
         colocaBarramento(memoria[pc]);
@@ -49,17 +49,21 @@ int buscaInstrucao(){
         if(instsBuscadas>qtdeInsts-1){
             aumentaStatusInstrucoes();
             aumentaVetorForwarding();
-            printf("AUMENTOU\n");
+            //printf("AUMENTOU\n");
             statusI[instsBuscadas-1].instrucao = ir;
         }
-        printf("LOOPS FEITOS: %d",qtdeloops);
-        printf("\nPOSICAO STATUSI %d", instsBuscadas-1);
+        //printf("LOOPS FEITOS: %d",qtdeloops);
+        //printf("\nPOSICAO STATUSI %d", instsBuscadas-1);
         //if(statusI[((pc%100)/4)*(1+qtdeloops)].busca == 0){
         //    statusI[((pc%100)/4)*(1+qtdeloops)].busca = clocki;
         //}
         if(statusI[instsBuscadas-1].busca == 0){
             printf("\nTA AQUIIIIIII");
             statusI[instsBuscadas-1].busca = clocki;
+            statusI[instsBuscadas-1].emissao = 0;
+            statusI[instsBuscadas-1].leitura_op = 0;
+            statusI[instsBuscadas-1].execucaofim = 0;
+            statusI[instsBuscadas-1].escrita = 0;
         }
         else if(statusI[instsBuscadas-1].busca != 0 && statusI[instsBuscadas-1].escrita!=0){
             statusI[instsBuscadas-1].busca = clocki;
@@ -70,6 +74,10 @@ int buscaInstrucao(){
         }
         else if(statusI[instsBuscadas-1].busca != 0 && statusI[instsBuscadas-1].escrita==0){
             statusI[instsBuscadas-1].busca = clocki;
+            statusI[instsBuscadas-1].emissao = 0;
+            statusI[instsBuscadas-1].leitura_op = 0;
+            statusI[instsBuscadas-1].execucaofim = 0;
+            statusI[instsBuscadas-1].escrita = 0;
         }
         /*
         else if(statusI[((pc%100)/4)*(1+qtdeloops)].busca != 0 && statusI[((pc%100)/4)*(1+qtdeloops)].escrita!=0){
@@ -84,10 +92,10 @@ int buscaInstrucao(){
         }*/
 
 
-        printf("\nOPCODE: %d", getOpcode(ir));
+        //printf("\nOPCODE: %d", getOpcode(ir));
         if(getOpcode(ir)==13){
             if(getImm(ir)%4!=0 || getImm(ir)<100){
-                printf("SALTO INCONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
+                //printf("SALTO INCONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
                 pc = pc+4;
             }
             else{
@@ -96,31 +104,31 @@ int buscaInstrucao(){
         }
         else if(getOpcode(ir)>=9 && getOpcode(ir)<=12){
             stalled=1;
-            printf("\nAPLICOU O STALL");
+            //printf("\nAPLICOU O STALL");
             //desvio condicional 
 
         }
         else if(getOpcode(ir)==16){
             stalled = 1;
-            printf("\nAPLICOU O STALL");
+            //printf("\nAPLICOU O STALL");
         }
         else{
             pc = pc+4;
-            printf("\nBUSCOU: %d", ir);
+            //printf("\nBUSCOU: %d", ir);
         }
     }
     else if(ir==1073741824){
-        printf("\nESTA EM STALL POR CAUSA DO EXIT");
+        //printf("\nESTA EM STALL POR CAUSA DO EXIT");
         return 0;
     }
     else if(stalled==2){
         stalled=0;
     }
     else{
-        printf("\nESTA EM STALL");
+        //printf("\nESTA EM STALL");
     }
     return 1;
-    printf("\n---------------------\n");
+    //printf("\n---------------------\n");
 }
 
 int getOpcode(int instrucao){
@@ -407,22 +415,22 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
 
         if(valor%4!=0 || valor<100){
-            printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
+            //printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
             valor=pc+4;
         }
         else{
-            printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
+            //printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
         } 
 
         resultado = resultado | valor; 
         return resultado;
     }
     else if(opcode==10){
-        printf("\nSALTO: if(%d > %d): pc = %d", bancoRegs[fonte1], bancoRegs[fonte2], pc+destino+4);
+        //printf("\nSALTO: if(%d > %d): pc = %d", bancoRegs[fonte1], bancoRegs[fonte2], pc+destino+4);
         resultado = 32 << 26;
         int valor=0;
         if(bancoRegs[fonte1]>bancoRegs[fonte2]){
-            printf("\n\n%d\n\n", destino);
+            //printf("\n\n%d\n\n", destino);
             valor = pc + 4 + destino;
         }
         else{
@@ -430,12 +438,12 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
 
         if(valor%4!=0 || valor<100){
-            printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
+            //printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
             valor=pc+4;
         }
         else{
-            printf("ENTROU AQUIIIIIIII\n");
-            printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
+            //printf("ENTROU AQUIIIIIIII\n");
+            //printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
         } 
         resultado = resultado | valor; 
         return resultado;
@@ -456,11 +464,11 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
 
         if(valor%4!=0 || valor<100){
-            printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
+            //printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
             valor=pc+4;
         }
         else{
-            printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
+            //printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
         } 
         resultado = resultado | valor; 
         return resultado;
@@ -481,11 +489,11 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         }
 
         if(valor%4!=0 || valor<100){
-            printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
+            //printf("SALTO CONDICIONAL NÃO TOMADO: ENDEREÇO ERRADO PARA PC\n");
             valor=pc+4;
         }
         else{
-            printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
+            //printf("SALTO CONDICIONAL TOMADO: ENDEREÇO %d\n",valor);
         } 
         resultado = resultado | valor; 
         return resultado;
@@ -497,17 +505,17 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
             destino = destino << 26;
             resultado = resultado | destino;
             int valor = memoria[fonte1 + bancoRegs[fonte2]];
-            printf("\nVALOR MEMORIA = %d", valor);
-            printf("ABS = %d", abs(valor));
+            //printf("\nVALOR MEMORIA = %d", valor);
+            //printf("ABS = %d", abs(valor));
             if(valor!= abs(valor)){
-                printf("AAAAAAAAAAAA");
+                //printf("AAAAAAAAAAAA");
                 int sinal = 1;
                 sinal = sinal << 25;
                 resultado = resultado | sinal;
             }	
             valor = abs(valor) << 0;
             resultado = resultado | valor;
-            printf("\nRESULTADO lw = %d", resultado);
+            //printf("\nRESULTADO lw = %d", resultado);
             return resultado;
     }
     else if(opcode==15){
@@ -520,7 +528,7 @@ int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
         resultado = resultado | endereco;
 
         if(valor<0){
-            printf("AAAAAAAA");
+            //printf("AAAAAAAA");
         }
         if(valor!= abs(valor)){
             int sinal = 1;
@@ -538,16 +546,16 @@ void escreveNoDestino(int resultado){
     // Extrai os 6 bits mais significativos (destino)
     int bits_destino = (resultado >> 26) & 0x3F;
     //printf("\n\nbits destino: %d", bits_destino);
-    printf("\n\n BINARIO ENVIADO PRA ESCRITA:");
-    printBinario(resultado);
+    //printf("\n\n BINARIO ENVIADO PRA ESCRITA:");
+    //printBinario(resultado);
     
     // Limpa os 6 bits mais significativos do resultado (obtendo o "resto")
     int resto = resultado & 0x1FFFFFF;
     
     int bit_25 = (resultado >> 25) & 1;
-    printf("BIT 25: %d", bit_25);
+    //printf("BIT 25: %d", bit_25);
 
-    printf("\n\nDESTINO = %d, RESTO = %d", bits_destino, resto);
+    //printf("\n\nDESTINO = %d, RESTO = %d", bits_destino, resto);
 
     if (bits_destino>=0 && bits_destino<=31){
         // Create a bitmask to isolate the 25th bit
@@ -556,7 +564,7 @@ void escreveNoDestino(int resultado){
                 printf("\nO registrador r0 não pode receber valor diferente de 0!");
             }
             else{
-                printf("INSERINDO %d em REGISTRADOR %d\n",resto,bits_destino);
+                //printf("INSERINDO %d em REGISTRADOR %d\n",resto,bits_destino);
                 bancoRegs[bits_destino]=-resto;
             }
         }
@@ -565,14 +573,14 @@ void escreveNoDestino(int resultado){
                 printf("\nO registrador r0 não pode receber valor diferente de 0!");
             }
             else{
-                printf("INSERINDO %d em REGISTRADOR %d\n",resto,bits_destino);
+                //printf("INSERINDO %d em REGISTRADOR %d\n",resto,bits_destino);
                 bancoRegs[bits_destino]=resto;
             }
         }
     }
     else if(bits_destino==32){
-        printf("INSERINDO em pc o valor %d\n",resto);
-        printf("SALTO FOI ESCRITO, RETIROU O STALL\n");
+        //printf("INSERINDO em pc o valor %d\n",resto);
+        //printf("SALTO FOI ESCRITO, RETIROU O STALL\n");
         pc=resto;
         stalled=2;
     }
@@ -584,8 +592,8 @@ void escreveNoDestino(int resultado){
         int valor = resultado & 0xFFFF;  // 0xFFFF represents 16 bits set to 1
 
         if(endereco%4!=0 && endereco>99){
-            printf("ENDEREÇO DE MEMORIA INVALIDO.\n");
-            printf("NAO FOI POSSIVEL INSERIR %d em memoria[%d].\n",valor,endereco);
+            //printf("ENDEREÇO DE MEMORIA INVALIDO.\n");
+            //printf("NAO FOI POSSIVEL INSERIR %d em memoria[%d].\n",valor,endereco);
         }
         else{
             if(bit_25 == 1){
@@ -606,17 +614,17 @@ void escreveNoDestino(int resultado){
 
 //DUVIDAS:::: DEPOIS DOS RESULTADOS ESTAREM PRONTOS QJ E QK ANULA?; NAO SEI DIREITO AINDA COMO VAI FUNCIONAR O VETORRESULTADOS
 void emiteInstrucao(){
-    printf("\n----------------EMISSAO--------------\n");
+    //printf("\n----------------EMISSAO--------------\n");
     if(ir!=0 && ir!=1073741824){
         int regDestino = getRegistradorDestino(ir);
         int tipoUF_inst = getTipoUF(ir);
         int disponivel = getUFdisponivel(tipoUF_inst);
         //printf("\nUF DISPONIVEL DO TIPO %d = %d", tipoUF_inst, disponivel);
-        printf("\nREG DESTINO = %d\n",regDestino);
-        printf("INSTRUCAO: ");
+        //printf("\nREG DESTINO = %d\n",regDestino);
+        //printf("INSTRUCAO: ");
         printBinario(ir);
         if(getOpcode(ir)==13){
-            printf("\nDesvio incondicional");
+            //printf("\nDesvio incondicional");
         }
         else if(vetorResultados[regDestino] == NULL && disponivel!=-1 && (getOpcode(ir)<9 || getOpcode(ir)>13)){
             //printf("%p", vetorResultados[1]);
@@ -647,7 +655,7 @@ void emiteInstrucao(){
                     vetorForwarding[indice_instrucao]=0;
                     stalled=0;
                     instrucoesEmitidas++;
-                    printf("\nEMITIU %d", ir);
+                    //printf("\nEMITIU %d", ir);
                 }
                 else{
                     //resetaUF(&unidadesFuncionais.ufAdd[disponivel]);
@@ -657,7 +665,7 @@ void emiteInstrucao(){
             }
             else if(tipoUF_inst==1){
                 int indice_instrucao = getIndiceInstrucao(ir);
-                printf("\n\nINDICE INST: %d", indice_instrucao);
+                //printf("\n\nINDICE INST: %d", indice_instrucao);
                 if(clocki-statusI[indice_instrucao].busca==1 || vetorForwarding[indice_instrucao]==1){
                     unidadesFuncionais.ufMul[disponivel].instrucao=ir;
                     unidadesFuncionais.ufMul[disponivel].busy = 1;
@@ -676,7 +684,7 @@ void emiteInstrucao(){
                     vetorForwarding[indice_instrucao]=0;
                     stalled=0;
                     instrucoesEmitidas++;
-                    printf("\nEMITIU %d", ir);
+                    //printf("\nEMITIU %d", ir);
                 }
                 else{
                     //resetaUF(&unidadesFuncionais.ufMul[disponivel]);
@@ -685,7 +693,7 @@ void emiteInstrucao(){
             }
             else if(tipoUF_inst==2){
                 int indice_instrucao = getIndiceInstrucao(ir);
-                printf("\nINDICE Q TA PEGANDO %d\n",indice_instrucao);
+                //printf("\nINDICE Q TA PEGANDO %d\n",indice_instrucao);
                 if(clocki-statusI[indice_instrucao].busca==1 || vetorForwarding[indice_instrucao]==1){
                     unidadesFuncionais.ufInt[disponivel].instrucao=ir;
                     unidadesFuncionais.ufInt[disponivel].busy = 1;
@@ -704,17 +712,17 @@ void emiteInstrucao(){
                     unidadesFuncionais.ufInt[disponivel].rj = (unidadesFuncionais.ufInt[disponivel].qj == NULL);
                     unidadesFuncionais.ufInt[disponivel].rk = (unidadesFuncionais.ufInt[disponivel].qk == NULL);
                     unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
-                    printf("\n\nFi: %d, Fj: %d, Fk: %d\n\n", unidadesFuncionais.ufInt[disponivel].fi, unidadesFuncionais.ufInt[disponivel].fj, unidadesFuncionais.ufInt[disponivel].fk);
-                    printf("INSTRUSSAO %s\n",instrucaoToString(unidadesFuncionais.ufInt[disponivel].instrucao));
+                    //printf("\n\nFi: %d, Fj: %d, Fk: %d\n\n", unidadesFuncionais.ufInt[disponivel].fi, unidadesFuncionais.ufInt[disponivel].fj, unidadesFuncionais.ufInt[disponivel].fk);
+                    //printf("INSTRUSSAO %s\n",instrucaoToString(unidadesFuncionais.ufInt[disponivel].instrucao));
                     //printf("FI: %d", unidadesFuncionais.ufInt[disponivel].fi);
                     vetorResultados[regDestino] = &unidadesFuncionais.ufInt[disponivel];
                     //Não teve RAW e pode ler nesse ciclo
-                    printf("\nENTROU AQUI AAA\n");
+                    //printf("\nENTROU AQUI AAA\n");
                     statusI[indice_instrucao].emissao = clocki;
                     vetorForwarding[indice_instrucao]=0;
                     stalled=0;
                     instrucoesEmitidas++;
-                    printf("\nEMITIU %d", ir);
+                    //printf("\nEMITIU %d", ir);
                 }
                 else{
                     //resetaUF(&unidadesFuncionais.ufInt[disponivel]);
@@ -728,7 +736,7 @@ void emiteInstrucao(){
         }
         else if(disponivel!=-1 && getOpcode(ir)>=9 && getOpcode(ir)<=12){
             int indice_instrucao = getIndiceInstrucao(ir);
-            printf("\n\nINDICE: %d", indice_instrucao);
+            //printf("\n\nINDICE: %d", indice_instrucao);
             if(statusI[indice_instrucao].emissao==0 && statusI[indice_instrucao].busca!=0){
                 unidadesFuncionais.ufInt[disponivel].instrucao=ir;
                 unidadesFuncionais.ufInt[disponivel].busy = 1;
@@ -741,40 +749,40 @@ void emiteInstrucao(){
                 unidadesFuncionais.ufInt[disponivel].rj = (unidadesFuncionais.ufInt[disponivel].qj == NULL);
                 unidadesFuncionais.ufInt[disponivel].rk = (unidadesFuncionais.ufInt[disponivel].qk == NULL);
                 unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
-                printf("\n\nFi: %d, Fj: %d, Fk: %d\n\n", unidadesFuncionais.ufInt[disponivel].fi, unidadesFuncionais.ufInt[disponivel].fj, unidadesFuncionais.ufInt[disponivel].fk);
+                //printf("\n\nFi: %d, Fj: %d, Fk: %d\n\n", unidadesFuncionais.ufInt[disponivel].fi, unidadesFuncionais.ufInt[disponivel].fj, unidadesFuncionais.ufInt[disponivel].fk);
                 //printf("\nAAAAAAAAAAAAAA\n");
                 //printf("FI: %d", unidadesFuncionais.ufInt[disponivel].fi);
-                printf("\nEMITIU %d", ir);
+                //printf("\nEMITIU %d", ir);
                 statusI[getIndiceInstrucao(ir)].emissao = clocki;
                 instrucoesEmitidas++;
             }
         }
         else{
             stalled = 1;
-            printf("\nNAO FOI POSSIVEL EMITIR A INSTRUCAO\n\n");
+            //printf("\nNAO FOI POSSIVEL EMITIR A INSTRUCAO\n\n");
         }
     }
     else{
-        printf("\nNão houve emissão");
+        //printf("\nNão houve emissão");
     }
-    printf("\n-----------------------------\n");
+    //printf("\n-----------------------------\n");
 }
 
 void leituraDeOperandos(){
-    printf("\n-------------------LEITURA OPS------------------\n");
+    //printf("\n-------------------LEITURA OPS------------------\n");
 
     for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
-        printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
+        //printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
         if(unidadesFuncionais.ufAdd[i].rj == 1 && unidadesFuncionais.ufAdd[i].rk == 1){
             int indice_instrucao = getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao);
-            printf("\n\nINDICE EH %d", indice_instrucao);
+            //printf("\n\nINDICE EH %d", indice_instrucao);
             if(vetorForwarding[indice_instrucao]==0){
                 //Não teve RAW e pode ler nesse ciclo
                 unidadesFuncionais.ufAdd[i].rj = 0;
                 unidadesFuncionais.ufAdd[i].rk = 0;
                 unidadesFuncionais.ufAdd[i].qtde_ciclos = getCiclos(unidadesFuncionais.ufAdd[i].operacao);
                 //printf("\nVIROU: rj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
-                printf("\nINST= %d", unidadesFuncionais.ufAdd[i].instrucao);
+                //printf("\nINST= %d", unidadesFuncionais.ufAdd[i].instrucao);
                 statusI[indice_instrucao].leitura_op = clocki;
                 //vetorForwarding[indice_instrucao]=1;
             }
@@ -783,7 +791,7 @@ void leituraDeOperandos(){
                 //Teve RAW e pode ler só no próximo ciclo pq não tem forwarding. 
             }
 
-            printf("LEU %d %d %d", unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk);
+            //printf("LEU %d %d %d", unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk);
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
@@ -802,7 +810,7 @@ void leituraDeOperandos(){
                 vetorForwarding[indice_instrucao]=0;
                 //Teve RAW e pode ler só no próximo ciclo pq não tem forwarding. 
             }
-            printf("LEU %d %d %d", unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk);
+            //printf("LEU %d %d %d", unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk);
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
@@ -820,15 +828,15 @@ void leituraDeOperandos(){
                 vetorForwarding[indice_instrucao]=0;
                 //Teve RAW e pode ler só no próximo ciclo pq não tem forwarding. 
             }
-            printf("LEU %d %d %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
+            //printf("LEU %d %d %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
         }
     }
-    printf("\n-----------------------------\n");
+    //printf("\n-----------------------------\n");
 }
 
 //TALVEZ SEJA MELHOR SÓ SIMULAR A EXECUCAO E FAZER ELA DE FATO SÓ NA ESCRITA DE RESULTADOS
 void execucao(){
-    printf("\n----------EXECUCAO-----------\n");
+    //printf("\n----------EXECUCAO-----------\n");
     for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
         if(unidadesFuncionais.ufAdd[i].qtde_ciclos!=0 && unidadesFuncionais.ufAdd[i].qtde_ciclos!=-1){
             if(statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaoinicio==0){
@@ -836,9 +844,9 @@ void execucao(){
             }
             unidadesFuncionais.ufAdd[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaofim=clocki;
-            printf("\nADD%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufAdd[i].qtde_ciclos);
+            //printf("\nADD%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufAdd[i].qtde_ciclos);
         }
-        if(unidadesFuncionais.ufAdd[i].qtde_ciclos==0 && (unidadesFuncionais.ufAdd[i].fi!=0 && unidadesFuncionais.ufAdd[i].fj!=0 && unidadesFuncionais.ufAdd[i].fk!=0)){
+        if(unidadesFuncionais.ufAdd[i].qtde_ciclos==0 && (unidadesFuncionais.ufAdd[i].fi!=0)){
             int resultado = executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao);
             unidadesFuncionais.ufAdd[i].qtde_ciclos = 0;
             //acho que tem que fazer resultado ser resultado+destino
@@ -846,7 +854,7 @@ void execucao(){
             //se for registrador, é de 0 a 31, se for pc pode ser 32 e memoria 33 ou qualquer outra coisa q kiser decidir 
             colocaBarramentoResultados(resultado);
             printBarramentoResultados();
-            printf("\nRESULTADOOOOO: %d", resultado);
+            //printf("\nRESULTADOOOOO: %d", resultado);
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
@@ -856,9 +864,9 @@ void execucao(){
             }
             unidadesFuncionais.ufMul[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaofim=clocki;
-            printf("\nMUL%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufMul[i].qtde_ciclos);
+            //printf("\nMUL%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufMul[i].qtde_ciclos);
         }
-        if(unidadesFuncionais.ufMul[i].qtde_ciclos==0 && (unidadesFuncionais.ufMul[i].fi!=0 && unidadesFuncionais.ufMul[i].fj!=0 && unidadesFuncionais.ufMul[i].fk!=0)){
+        if(unidadesFuncionais.ufMul[i].qtde_ciclos==0 && (unidadesFuncionais.ufMul[i].fi!=0)){
             //executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
             unidadesFuncionais.ufMul[i].qtde_ciclos = 0;
             int resultado = executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
@@ -873,29 +881,29 @@ void execucao(){
             }
             unidadesFuncionais.ufInt[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaofim=clocki;
-            printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
+            //printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
         }
-        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0 || unidadesFuncionais.ufInt[i].fj!=0 || unidadesFuncionais.ufInt[i].fk!=0)){
+        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0)){
             //executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
             //unidadesFuncionais.ufInt[i].qtde_ciclos = 0;
             int resultado = executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
-            printf("\nBINARIO INDO PRO BARRAMENTO: ");
-            printBinario(resultado);
-            printf("-------");
-            printf("DESTINO = %d FONTE1 = %d FONTE2 = %d OPERACAO=%d \n\n",unidadesFuncionais.ufInt[i].fi,unidadesFuncionais.ufInt[i].fj,unidadesFuncionais.ufInt[i].fk,unidadesFuncionais.ufInt[i].operacao);
+            //printf("\nBINARIO INDO PRO BARRAMENTO: ");
+            //printBinario(resultado);
+            //printf("-------");
+            //printf("DESTINO = %d FONTE1 = %d FONTE2 = %d OPERACAO=%d \n\n",unidadesFuncionais.ufInt[i].fi,unidadesFuncionais.ufInt[i].fj,unidadesFuncionais.ufInt[i].fk,unidadesFuncionais.ufInt[i].operacao);
             colocaBarramentoResultados(resultado);
             printBarramentoResultados();
 
 
         }
     }
-    printf("\n-----------------\n");
+    //printf("\n-----------------\n");
 }
 
 
 //TEMOS QUE LEVAR EM CONSIDERAÇÃO QUE INSTRUÇÕES DE STORE E SALTO NÃO TEM RAW ENTAO SEMPRE PODE ESCREVER
 void escritaResultados(){
-    printf("\n-----------------ESCRITA---------------\n");
+    //printf("\n-----------------ESCRITA---------------\n");
     int checkAddA=1, checkAddB=1, checkAddC=1;
     int checkIntA=1, checkIntB=1, checkIntC=1;
     int checkMulA=1, checkMulB=1, checkMulC=1;
@@ -977,7 +985,7 @@ void escritaResultados(){
                     }
                 }
                 
-                printf("\nENTROU AQUI PRO ADD R%d R%d R%d\n",unidadesFuncionais.ufAdd[i].fi,unidadesFuncionais.ufAdd[i].fj,unidadesFuncionais.ufAdd[i].fk);
+                //printf("\nENTROU AQUI PRO ADD R%d R%d R%d\n",unidadesFuncionais.ufAdd[i].fi,unidadesFuncionais.ufAdd[i].fj,unidadesFuncionais.ufAdd[i].fk);
                 linhaBarramento = pegaBarramentoResultados(executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao));
                 if(linhaBarramento!=-1){
                     vetorResultados[unidadesFuncionais.ufAdd[i].fi] = 0;
@@ -1221,5 +1229,5 @@ void escritaResultados(){
         checkIntC = 1;
     }
     limpaBarramentoResultados();
-    printf("\n---------------------------\n");
+    //printf("\n---------------------------\n");
 }

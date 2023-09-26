@@ -22,7 +22,9 @@ lw:2
 sw:2
 */
 . data
-5
+#qual termo da sequencia sera calculado
+10
+#marcações
 0
 1
 . text
