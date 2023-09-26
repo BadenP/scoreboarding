@@ -86,6 +86,7 @@ int main(int argc, char *argv[]){
         }
         printf("\n\nFIM DO PROGRAMA\n");
         printRegistradores();
+        printMemoria();
         /*
         buscaInstrucao();
         clock++;

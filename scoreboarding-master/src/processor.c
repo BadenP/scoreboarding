@@ -65,7 +65,7 @@ int buscaInstrucao(){
         //     statusI[instsBuscadas-1].execucaofim = 0;
         //     statusI[instsBuscadas-1].escrita = 0;
         // }
-        statusI[instsBuscadas-1].busca = 0;
+        //statusI[instsBuscadas-1].busca = 0;
         statusI[instsBuscadas-1].emissao = 0;
         statusI[instsBuscadas-1].leitura_op = 0;
         statusI[instsBuscadas-1].execucaofim = 0;
@@ -263,7 +263,7 @@ int getCiclos(int opcode){
 //FALTA GERENCIAR O STALL
 int executaInstrucao(int destino, int fonte1, int fonte2, int opcode){
     int resultado=0;
-    //printf("\nOPCODE: %d, DESTINO: %d, FONTE1: %d, FONTE2: %d", opcode, destino, fonte1, fonte2);
+    printf("\nOPCODE: %d, DESTINO: %d, FONTE1: %d, FONTE2: %d", opcode, destino, fonte1, fonte2);
     if(opcode==0){
         //printf("\nESCREVEU r%d = r%d + r%d", destino, fonte1, fonte2);
         //bancoRegs[destino] = bancoRegs[fonte1] + bancoRegs[fonte2];
@@ -621,7 +621,13 @@ void emiteInstrucao(){
                         unidadesFuncionais.ufAdd[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
 
                     }
-                    unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                    if(vetorResultados[getRegistradorFonte1(ir)]==0){
+                        unidadesFuncionais.ufAdd[disponivel].qj = NULL;
+                    }
+                    else{
+                        unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                    }
+                    //unidadesFuncionais.ufAdd[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
                     unidadesFuncionais.ufAdd[disponivel].rj = (unidadesFuncionais.ufAdd[disponivel].qj == NULL);
                     unidadesFuncionais.ufAdd[disponivel].rk = (unidadesFuncionais.ufAdd[disponivel].qk == NULL);
                     unidadesFuncionais.ufAdd[disponivel].qtde_ciclos = -1;
@@ -650,8 +656,18 @@ void emiteInstrucao(){
                     unidadesFuncionais.ufMul[disponivel].fj = getRegistradorFonte1(ir);
                     unidadesFuncionais.ufMul[disponivel].fk = getRegistradorFonte2(ir);
                     unidadesFuncionais.ufMul[disponivel].operacao = getOpcode(ir);
-                    unidadesFuncionais.ufMul[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
-                    unidadesFuncionais.ufMul[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+                    if(vetorResultados[getRegistradorFonte1(ir)]==0){
+                        unidadesFuncionais.ufMul[disponivel].qj = NULL;
+                    }
+                    else{
+                        unidadesFuncionais.ufMul[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                    }
+                    if(vetorResultados[getRegistradorFonte2(ir)]==0){
+                        unidadesFuncionais.ufMul[disponivel].qk = NULL;
+                    }
+                    else{
+                        unidadesFuncionais.ufMul[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+                    }
                     unidadesFuncionais.ufMul[disponivel].rj = (unidadesFuncionais.ufMul[disponivel].qj == NULL);
                     unidadesFuncionais.ufMul[disponivel].rk = (unidadesFuncionais.ufMul[disponivel].qk == NULL);
                     unidadesFuncionais.ufMul[disponivel].qtde_ciclos = -1;
@@ -679,8 +695,18 @@ void emiteInstrucao(){
                     unidadesFuncionais.ufInt[disponivel].fk = getRegistradorFonte2(ir);
                     unidadesFuncionais.ufInt[disponivel].operacao = getOpcode(ir);
                     if(getOpcode(ir)!=15){
-                        unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
-                        unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)]; 
+                        if(vetorResultados[getRegistradorFonte1(ir)]==0){
+                            unidadesFuncionais.ufInt[disponivel].qj = NULL;
+                        }
+                        else{
+                            unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                        }
+                        if(vetorResultados[getRegistradorFonte2(ir)]==0){
+                            unidadesFuncionais.ufInt[disponivel].qk = NULL;
+                        }
+                        else{
+                            unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+                        }
                     }
                     else{
                         unidadesFuncionais.ufInt[disponivel].qj = NULL;
@@ -721,8 +747,20 @@ void emiteInstrucao(){
                 unidadesFuncionais.ufInt[disponivel].fj = getRegistradorFonte1(ir);
                 unidadesFuncionais.ufInt[disponivel].fk = getRegistradorFonte2(ir);
                 unidadesFuncionais.ufInt[disponivel].operacao = getOpcode(ir);
-                unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
-                unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
+                if(vetorResultados[getRegistradorFonte1(ir)]==0){
+                    unidadesFuncionais.ufInt[disponivel].qj = NULL;
+                }
+                else{
+                    unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                }
+                if(vetorResultados[getRegistradorFonte2(ir)]==0){
+                    unidadesFuncionais.ufInt[disponivel].qk = NULL; 
+                }
+                else{
+                    unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)]; 
+                }
+                //unidadesFuncionais.ufInt[disponivel].qj = vetorResultados[getRegistradorFonte1(ir)];
+                //unidadesFuncionais.ufInt[disponivel].qk = vetorResultados[getRegistradorFonte2(ir)];
                 unidadesFuncionais.ufInt[disponivel].rj = (unidadesFuncionais.ufInt[disponivel].qj == NULL);
                 unidadesFuncionais.ufInt[disponivel].rk = (unidadesFuncionais.ufInt[disponivel].qk == NULL);
                 unidadesFuncionais.ufInt[disponivel].qtde_ciclos = -1;
@@ -746,7 +784,7 @@ void emiteInstrucao(){
 }
 
 void leituraDeOperandos(){
-    //printf("\n-------------------LEITURA OPS------------------\n");
+    printf("\n-------------------LEITURA OPS------------------\n");
 
     for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
         //printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufAdd[i].rj, unidadesFuncionais.ufAdd[i].rk);
@@ -791,6 +829,7 @@ void leituraDeOperandos(){
         }
     }
     for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
+        printf("\n\nrj: %d; rk: %d", unidadesFuncionais.ufInt[i].rj, unidadesFuncionais.ufInt[i].rk);
         if(unidadesFuncionais.ufInt[i].rj == 1 && unidadesFuncionais.ufInt[i].rk == 1){
             int indice_instrucao = getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao);
             if(vetorForwarding[indice_instrucao]==0){
@@ -805,7 +844,7 @@ void leituraDeOperandos(){
                 vetorForwarding[indice_instrucao]=0;
                 //Teve RAW e pode ler só no próximo ciclo pq não tem forwarding. 
             }
-            //printf("LEU %d %d %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
+            printf("LEU %d %d %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
         }
     }
     //printf("\n-----------------------------\n");
@@ -813,19 +852,19 @@ void leituraDeOperandos(){
 
 //TALVEZ SEJA MELHOR SÓ SIMULAR A EXECUCAO E FAZER ELA DE FATO SÓ NA ESCRITA DE RESULTADOS
 void execucao(){
-    //printf("\n----------EXECUCAO-----------\n");
+    printf("\n----------EXECUCAO-----------\n");
     for(int i=0; i<unidadesFuncionais.qtdeADD; i++){
         if(unidadesFuncionais.ufAdd[i].qtde_ciclos!=0 && unidadesFuncionais.ufAdd[i].qtde_ciclos!=-1){
-            if(statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaoinicio==0){
-                //statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaoinicio=clocki;
-            }
+            // if(statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaoinicio==0){
+            //     //statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaoinicio=clocki;
+            // }
             unidadesFuncionais.ufAdd[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufAdd[i].instrucao)].execucaofim=clocki;
             //printf("\nADD%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufAdd[i].qtde_ciclos);
         }
         if(unidadesFuncionais.ufAdd[i].qtde_ciclos==0 && (unidadesFuncionais.ufAdd[i].fi!=0)){
             int resultado = executaInstrucao(unidadesFuncionais.ufAdd[i].fi, unidadesFuncionais.ufAdd[i].fj, unidadesFuncionais.ufAdd[i].fk, unidadesFuncionais.ufAdd[i].operacao);
-            unidadesFuncionais.ufAdd[i].qtde_ciclos = 0;
+            //unidadesFuncionais.ufAdd[i].qtde_ciclos = 0;
             //acho que tem que fazer resultado ser resultado+destino
             //possiveis exemplos: bits resultado e bits para registrador ou pc ou memoria 
             //se for registrador, é de 0 a 31, se for pc pode ser 32 e memoria 33 ou qualquer outra coisa q kiser decidir 
@@ -836,16 +875,16 @@ void execucao(){
     }
     for(int i=0; i<unidadesFuncionais.qtdeMUL; i++){
         if(unidadesFuncionais.ufMul[i].qtde_ciclos!=0 && unidadesFuncionais.ufMul[i].qtde_ciclos!=-1){
-            if(statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaoinicio==0){
-                //statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaoinicio=clocki;
-            }
+            // if(statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaoinicio==0){
+            //     //statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaoinicio=clocki;
+            // }
             unidadesFuncionais.ufMul[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufMul[i].instrucao)].execucaofim=clocki;
             //printf("\nMUL%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufMul[i].qtde_ciclos);
         }
         if(unidadesFuncionais.ufMul[i].qtde_ciclos==0 && (unidadesFuncionais.ufMul[i].fi!=0)){
             //executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
-            unidadesFuncionais.ufMul[i].qtde_ciclos = 0;
+            //unidadesFuncionais.ufMul[i].qtde_ciclos = 0;
             int resultado = executaInstrucao(unidadesFuncionais.ufMul[i].fi, unidadesFuncionais.ufMul[i].fj, unidadesFuncionais.ufMul[i].fk, unidadesFuncionais.ufMul[i].operacao);
             colocaBarramentoResultados(resultado);
             printBarramentoResultados();
@@ -853,12 +892,13 @@ void execucao(){
     }
     for(int i=0; i<unidadesFuncionais.qtdeINT; i++){
         if(unidadesFuncionais.ufInt[i].qtde_ciclos!=0 && unidadesFuncionais.ufInt[i].qtde_ciclos!=-1){
-            if(statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaoinicio==0){
-                //statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaoinicio=clocki;
-            }
+            // if(statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaoinicio==0){
+            //     //statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaoinicio=clocki;
+            // }
+
             unidadesFuncionais.ufInt[i].qtde_ciclos--;
             statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaofim=clocki;
-            //printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
+            printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
         }
         if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0)){
             //executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
@@ -1119,7 +1159,7 @@ void escritaResultados(){
         //printf("\n\nCHECK %d, %d, %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
         //printf("\n\nCHECK %d, %d, %d", checkIntA, checkIntB, checkIntC);
         if(checkIntA && checkIntB && checkIntC && unidadesFuncionais.ufInt[i].qtde_ciclos == 0 && 
-        (unidadesFuncionais.ufInt[i].fi != 0 || unidadesFuncionais.ufInt[i].fj != 0 || unidadesFuncionais.ufInt[i].fk !=0)){
+        (unidadesFuncionais.ufInt[i].fi != 0 || (unidadesFuncionais.ufInt[i].fj != 0 || unidadesFuncionais.ufInt[i].fk !=0))){
             for(int j=0; j<unidadesFuncionais.qtdeINT; j++){
                 if((unidadesFuncionais.ufInt[i].fi!=unidadesFuncionais.ufInt[j].fj || unidadesFuncionais.ufInt[j].rj==0)
                     && (unidadesFuncionais.ufInt[i].fi!=unidadesFuncionais.ufInt[j].fk || unidadesFuncionais.ufInt[j].rk==0)){
@@ -1186,6 +1226,7 @@ void escritaResultados(){
                     if(unidadesFuncionais.ufInt[i].fi!=abs(unidadesFuncionais.ufInt[i].fi))
                         qtdeloops++;
                 }
+                printf("\nPRECISA ENTRAR AQUI");
                 escreveNoDestino(barramentoResultados[linhaBarramento]);
                 statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].escrita=clocki;
                 unidadesFuncionais.ufInt[i].instrucao=0;

@@ -12,10 +12,10 @@ statusInstrucoes *statusI;
 
 
 void inicializaStatusInstrucoes(){
-    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*qtdeInsts-1);
+    statusI = (statusInstrucoes*)malloc(sizeof(statusInstrucoes)*qtdeInsts-2);
     int j=0;
     int i=400;
-    for(j=0; j<instsBuscadas; j++){
+    for(j=0; j<qtdeInsts-1; j++){
         printf("entrou %d\n",i);
         if(memoria[i]!=1073741824)
             statusI[j].instrucao = memoria[i];
@@ -52,11 +52,13 @@ void statusRegistradores(){
 
 //tentar com um while pra pegar sempre a última
 int getIndiceInstrucao(int instrucao){
+    int res;
     for (int i=0; i<instsBuscadas; i++){
-        if(statusI[i].instrucao==instrucao && statusI[i].escrita==0){
-            return i;
+        if(statusI[i].instrucao==instrucao){// && statusI[i].escrita==0){
+            res = i;
         }
     }
+    return res;
 }
 
 int encontraQ(UF* unidadefuncional){

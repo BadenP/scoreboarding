@@ -47,8 +47,8 @@ sw r5, 4(r2)
 #incrementa r2 e r3
 addi r2, r2, 1
 addi r3, r3, 1
-#bne r3, r1, -32
-bgt r1, r3, -32
+bne r3, r1, -32
+#bgt r1, r3, -32
 subi r1, r1, 1
 bne r1, r0, -48
 exit

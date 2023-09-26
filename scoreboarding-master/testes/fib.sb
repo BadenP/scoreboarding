@@ -23,10 +23,11 @@ sw:2
 */
 . data
 #numero da sequencia a ser buscado
-25
+31
 #marcador de fim
 1
 . text
+#resultado será gravado no registrador 31
 lw r1, 0(r0)    
 lw r2, 4(r0)            
 lw r4, 4(r0)         
