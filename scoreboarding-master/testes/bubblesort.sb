@@ -1,0 +1,54 @@
+/*
+UF
+add: 2
+mul : 2
+inteiro :2
+INST
+add : 2
+addi:1
+sub:1
+subi:2 
+mul: 10
+div:4
+and:3
+or:2
+not:3
+blt:2
+bgt:4
+beq:5
+bne:6
+j:4
+lw:2
+sw:2
+*/
+. data
+#tamanho a ser do array a ser ordenado
+5
+#array:
+1
+9
+2
+4
+6
+. text
+#carrega o tamanho do array e decrementa
+lw r1, 0(r0)    
+subi r1, r1, 1
+#começando com r2 em 0 e r3 em 1 (indices)          
+addi r2, r0, 1
+addi r3, r0, 1
+#loop interno
+lw r4, 4(r2)
+lw r5, 4(r3)
+bgt r4, r5, 8
+#se r4>r5 pula a troca
+sw r4, 4(r3)
+sw r5, 4(r2)
+#incrementa r2 e r3
+addi r2, r2, 1
+addi r3, r3, 1
+#bne r3, r1, -32
+bgt r1, r3, -32
+subi r1, r1, 1
+bne r1, r0, -48
+exit
