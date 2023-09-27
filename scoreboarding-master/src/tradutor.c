@@ -165,7 +165,7 @@ int getCodigoOpcode(const char opcode[4]) {
 int instrucaoParaBinario(char *buffer){
     char* token;
     int inst=0;
-    token = strtok(buffer, " ");
+    token = strtok(buffer, " \r\n");
     int codOpcode = getCodigoOpcode(token);
     int rs, rd, rt, imm, address;
     inst = codOpcode << 26;

@@ -38,4 +38,5 @@ sub r4, r2, r10
 mul r11, r23, r5
 div r7, r1, r2
 addi r12, r7, r1
+sw r5, 16(r0)
 exit

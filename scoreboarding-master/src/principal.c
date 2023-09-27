@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
             statusUFs();
             printStatusReg();
             printRegistradores();
-            //printMemoria();
+            printMemoria();
             //printBarramentoResultados();
             while (getchar() != '\n') {
             }
