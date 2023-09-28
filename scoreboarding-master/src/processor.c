@@ -911,7 +911,8 @@ void execucao(){
             statusI[getIndiceInstrucao(unidadesFuncionais.ufInt[i].instrucao)].execucaofim=clocki;
             printf("\nINT%d FALTAM %d CICLOS\n", i, unidadesFuncionais.ufInt[i].qtde_ciclos);
         }
-        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0 || unidadesFuncionais.ufInt[i].operacao==15)){
+        if(unidadesFuncionais.ufInt[i].qtde_ciclos==0 && (unidadesFuncionais.ufInt[i].fi!=0 || unidadesFuncionais.ufInt[i].operacao==15 
+        || (getOpcode(unidadesFuncionais.ufInt[i].instrucao)>=9 && getOpcode(unidadesFuncionais.ufInt[i].instrucao)<=12))){
             printf("\nEntrou aqui");
             //executaInstrucao(unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk, unidadesFuncionais.ufInt[i].operacao);
             //unidadesFuncionais.ufInt[i].qtde_ciclos = 0;
@@ -1072,8 +1073,7 @@ void escritaResultados(){
                 }
             }
         }
-        if(checkMulA && checkMulB && checkMulC && unidadesFuncionais.ufMul[i].qtde_ciclos == 0 &&
-        (unidadesFuncionais.ufMul[i].fi != 0 || (unidadesFuncionais.ufMul[i].fj != 0 || unidadesFuncionais.ufMul[i].fk !=0))){
+        if(checkMulA && checkMulB && checkMulC && unidadesFuncionais.ufMul[i].qtde_ciclos == 0 && (unidadesFuncionais.ufMul[i].fi != 0)){
             for(int j=0; j<unidadesFuncionais.qtdeMUL; j++){
                 if((unidadesFuncionais.ufMul[i].fi!=unidadesFuncionais.ufMul[j].fj || unidadesFuncionais.ufMul[j].rj==0)
                 && (unidadesFuncionais.ufMul[i].fi!=unidadesFuncionais.ufMul[j].fk || unidadesFuncionais.ufMul[j].rk==0)){
@@ -1183,8 +1183,8 @@ void escritaResultados(){
         }
         printf("\n\nCHECK fi = %d, fj = %d, fk = %d", unidadesFuncionais.ufInt[i].fi, unidadesFuncionais.ufInt[i].fj, unidadesFuncionais.ufInt[i].fk);
         printf("\n\nCHECK %d, %d, %d", checkIntA, checkIntB, checkIntC);
-        if(checkIntA && checkIntB && checkIntC && unidadesFuncionais.ufInt[i].qtde_ciclos == 0 && 
-        (unidadesFuncionais.ufInt[i].fi != 0 || unidadesFuncionais.ufInt[i].fj != 0 || unidadesFuncionais.ufInt[i].fk !=0)){
+        if(checkIntA && checkIntB && checkIntC && unidadesFuncionais.ufInt[i].qtde_ciclos == 0 && (unidadesFuncionais.ufInt[i].fi != 0
+        || (getOpcode(unidadesFuncionais.ufInt[i].instrucao)<=12 && getOpcode(unidadesFuncionais.ufInt[i].instrucao)>=9))){
             printf("\nentra aqui no 57");
             for(int j=0; j<unidadesFuncionais.qtdeINT; j++){
                 if((unidadesFuncionais.ufInt[i].fi!=unidadesFuncionais.ufInt[j].fj || unidadesFuncionais.ufInt[j].rj==0)
