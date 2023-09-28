@@ -1,0 +1,902 @@
+==41849== Memcheck, a memory error detector
+==41849== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==41849== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==41849== Command: ./programa -p fatorial.sb -m 130 -o output.txt -l 3
+==41849== Parent PID: 4207
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10AED5: printMemoria (memoria.c:24)
+==41849==    by 0x10A040: leituraArquivo (main.c:227)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Use of uninitialised value of size 8
+==41849==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10AED5: printMemoria (memoria.c:24)
+==41849==    by 0x10A040: leituraArquivo (main.c:227)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10AED5: printMemoria (memoria.c:24)
+==41849==    by 0x10A040: leituraArquivo (main.c:227)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10AED5: printMemoria (memoria.c:24)
+==41849==    by 0x10A040: leituraArquivo (main.c:227)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E3C85: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10AED5: printMemoria (memoria.c:24)
+==41849==    by 0x10A040: leituraArquivo (main.c:227)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E160: escritaResultados (processor.c:885)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E1A0: escritaResultados (processor.c:887)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E1BA: escritaResultados (processor.c:887)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E1EA: escritaResultados (processor.c:888)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E204: escritaResultados (processor.c:888)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E25D: escritaResultados (processor.c:895)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E277: escritaResultados (processor.c:895)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E2A7: escritaResultados (processor.c:896)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E2C1: escritaResultados (processor.c:896)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E31A: escritaResultados (processor.c:903)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E334: escritaResultados (processor.c:903)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E364: escritaResultados (processor.c:904)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E37E: escritaResultados (processor.c:904)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E3DC: escritaResultados (processor.c:910)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E3FA: escritaResultados (processor.c:910)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10ECC0: escritaResultados (processor.c:985)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10ED00: escritaResultados (processor.c:987)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10ED1A: escritaResultados (processor.c:987)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10ED4A: escritaResultados (processor.c:988)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10ED64: escritaResultados (processor.c:988)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EDBA: escritaResultados (processor.c:995)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EDD4: escritaResultados (processor.c:995)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EE04: escritaResultados (processor.c:996)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EE1E: escritaResultados (processor.c:996)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EE74: escritaResultados (processor.c:1003)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EE8E: escritaResultados (processor.c:1003)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EEBE: escritaResultados (processor.c:1004)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EED8: escritaResultados (processor.c:1004)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EF2A: escritaResultados (processor.c:1011)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EF48: escritaResultados (processor.c:1011)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EF62: escritaResultados (processor.c:1012)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EF7C: escritaResultados (processor.c:1012)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F7A9: escritaResultados (processor.c:1083)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F7CF: escritaResultados (processor.c:1084)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F831: escritaResultados (processor.c:1088)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F84B: escritaResultados (processor.c:1088)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F87B: escritaResultados (processor.c:1089)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F895: escritaResultados (processor.c:1089)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F8EE: escritaResultados (processor.c:1097)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F908: escritaResultados (processor.c:1097)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F938: escritaResultados (processor.c:1098)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F952: escritaResultados (processor.c:1098)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F9A8: escritaResultados (processor.c:1105)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F9C2: escritaResultados (processor.c:1105)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F9F2: escritaResultados (processor.c:1106)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FA0C: escritaResultados (processor.c:1106)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FA61: escritaResultados (processor.c:1116)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FA7F: escritaResultados (processor.c:1116)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FA99: escritaResultados (processor.c:1117)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FAB3: escritaResultados (processor.c:1117)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D9EC: execucao (processor.c:813)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DAE4: execucao (processor.c:821)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DB02: execucao (processor.c:821)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DC24: execucao (processor.c:833)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DD1C: execucao (processor.c:841)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DD3A: execucao (processor.c:841)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DE43: execucao (processor.c:850)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DF3B: execucao (processor.c:858)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DF59: execucao (processor.c:858)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DF73: execucao (processor.c:858)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10DF8D: execucao (processor.c:858)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10D462: leituraDeOperandos (processor.c:747)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Use of uninitialised value of size 8
+==41849==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10D462: leituraDeOperandos (processor.c:747)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10D462: leituraDeOperandos (processor.c:747)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10D462: leituraDeOperandos (processor.c:747)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E3C85: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x10D462: leituraDeOperandos (processor.c:747)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D47C: leituraDeOperandos (processor.c:748)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D65F: leituraDeOperandos (processor.c:770)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D81D: leituraDeOperandos (processor.c:789)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10B091: buscaInstrucao (processor.c:40)
+==41849==    by 0x1094E9: main (principal.c:36)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x11118E: printStatusInstrucoes (scoreboarding.c:83)
+==41849==    by 0x109527: main (principal.c:39)
+==41849== 
+==41849== Use of uninitialised value of size 8
+==41849==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x11118E: printStatusInstrucoes (scoreboarding.c:83)
+==41849==    by 0x109527: main (principal.c:39)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x11118E: printStatusInstrucoes (scoreboarding.c:83)
+==41849==    by 0x109527: main (principal.c:39)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x11118E: printStatusInstrucoes (scoreboarding.c:83)
+==41849==    by 0x109527: main (principal.c:39)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E44FB: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x11118E: printStatusInstrucoes (scoreboarding.c:83)
+==41849==    by 0x109527: main (principal.c:39)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111273: statusUFs (scoreboarding.c:96)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x11131E: statusUFs (scoreboarding.c:111)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x111412: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x111412: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x111412: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x111433: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x111433: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x111433: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x1114DB: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Use of uninitialised value of size 8
+==41849==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x1114DB: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==41849==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x1114DB: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x1114DB: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x48E44FB: __vfprintf_internal (vfprintf-internal.c:1516)
+==41849==    by 0x48CE81E: printf (printf.c:33)
+==41849==    by 0x1114DB: statusUFs (scoreboarding.c:125)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111528: statusUFs (scoreboarding.c:141)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x1115D3: statusUFs (scoreboarding.c:156)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x1116C7: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x1116C7: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x1116C7: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x1116E8: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x1116E8: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== 
+==41849== More than 100 errors detected.  Subsequent errors
+==41849== will still be recorded, but in less detail than before.
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x1116E8: statusUFs (scoreboarding.c:170)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x1117DD: statusUFs (scoreboarding.c:186)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111888: statusUFs (scoreboarding.c:201)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x11197C: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x11197C: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x11197C: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F9A: encontraQ (scoreboarding.c:63)
+==41849==    by 0x11199D: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110FD3: encontraQ (scoreboarding.c:68)
+==41849==    by 0x11199D: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x111009: encontraQ (scoreboarding.c:73)
+==41849==    by 0x11199D: statusUFs (scoreboarding.c:215)
+==41849==    by 0x109531: main (principal.c:40)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110919: getUFdisponivel (unidade_funcional.c:95)
+==41849==    by 0x10C5B7: emiteInstrucao (processor.c:593)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10CCBF: emiteInstrucao (processor.c:667)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D85E: leituraDeOperandos (processor.c:790)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DE84: execucao (processor.c:851)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DED5: execucao (processor.c:855)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110898: getUFdisponivel (unidade_funcional.c:81)
+==41849==    by 0x10C5B7: emiteInstrucao (processor.c:593)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10C689: emiteInstrucao (processor.c:604)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D4BD: leituraDeOperandos (processor.c:749)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FAF3: escritaResultados (processor.c:1119)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FB41: escritaResultados (processor.c:1120)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FB9B: escritaResultados (processor.c:1122)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FC33: escritaResultados (processor.c:1128)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FCEA: escritaResultados (processor.c:1138)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FD38: escritaResultados (processor.c:1139)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FD86: escritaResultados (processor.c:1140)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FE1E: escritaResultados (processor.c:1146)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FED5: escritaResultados (processor.c:1155)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FF23: escritaResultados (processor.c:1156)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10FF71: escritaResultados (processor.c:1157)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110009: escritaResultados (processor.c:1163)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x1101EA: escritaResultados (processor.c:1185)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DA2D: execucao (processor.c:814)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DA7E: execucao (processor.c:818)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10C6D5: emiteInstrucao (processor.c:605)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E472: escritaResultados (processor.c:913)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E4BC: escritaResultados (processor.c:914)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E516: escritaResultados (processor.c:916)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E5AE: escritaResultados (processor.c:921)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E665: escritaResultados (processor.c:930)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E6AF: escritaResultados (processor.c:931)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E6FD: escritaResultados (processor.c:932)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E795: escritaResultados (processor.c:937)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E84C: escritaResultados (processor.c:945)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E896: escritaResultados (processor.c:946)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E8E4: escritaResultados (processor.c:947)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10E97C: escritaResultados (processor.c:952)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10EB37: escritaResultados (processor.c:965)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x1108DA: getUFdisponivel (unidade_funcional.c:88)
+==41849==    by 0x10C5B7: emiteInstrucao (processor.c:593)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10C9C1: emiteInstrucao (processor.c:639)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D0D0: emiteInstrucao (processor.c:710)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D110: emiteInstrucao (processor.c:712)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D37E: emiteInstrucao (processor.c:728)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10E7EF: escritaResultados (processor.c:940)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10E93E: escritaResultados (processor.c:950)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D6A0: leituraDeOperandos (processor.c:771)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10D746: leituraDeOperandos (processor.c:777)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DC65: execucao (processor.c:834)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10DCB6: execucao (processor.c:838)
+==41849==    by 0x1094CB: main (principal.c:33)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10EFBC: escritaResultados (processor.c:1014)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F006: escritaResultados (processor.c:1015)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F060: escritaResultados (processor.c:1017)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F0F8: escritaResultados (processor.c:1022)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F1AF: escritaResultados (processor.c:1031)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F1F9: escritaResultados (processor.c:1032)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F247: escritaResultados (processor.c:1033)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F2DF: escritaResultados (processor.c:1038)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F396: escritaResultados (processor.c:1046)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F3E0: escritaResultados (processor.c:1047)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F42E: escritaResultados (processor.c:1048)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10F4C6: escritaResultados (processor.c:1053)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x110F56: getIndiceInstrucao (scoreboarding.c:55)
+==41849==    by 0x10F629: escritaResultados (processor.c:1064)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849== 
+==41849== Conditional jump or move depends on uninitialised value(s)
+==41849==    at 0x10D139: emiteInstrucao (processor.c:712)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10CC4B: emiteInstrucao (processor.c:656)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849==  Address 0x4a9b5dc is 0 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10E7F9: escritaResultados (processor.c:940)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849==  Address 0x4a9b5dc is 0 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10E948: escritaResultados (processor.c:950)
+==41849==    by 0x1094C1: main (principal.c:32)
+==41849==  Address 0x4a9b5e0 is 4 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid read of size 4
+==41849==    at 0x10D6B7: leituraDeOperandos (processor.c:772)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849==  Address 0x4a9b5dc is 0 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10D787: leituraDeOperandos (processor.c:782)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849==  Address 0x4a9b5dc is 0 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid read of size 4
+==41849==    at 0x10D875: leituraDeOperandos (processor.c:791)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849==  Address 0x4a9b5e0 is 4 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10D925: leituraDeOperandos (processor.c:800)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849==  Address 0x4a9b5e0 is 4 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid read of size 4
+==41849==    at 0x10D10B: emiteInstrucao (processor.c:712)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849==  Address 0x4a9c324 is 8 bytes after a block of size 252 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x110E19: aumentaStatusInstrucoes (scoreboarding.c:37)
+==41849==    by 0x10AFEE: buscaInstrucao (processor.c:31)
+==41849==    by 0x1094E9: main (principal.c:36)
+==41849== 
+==41849== Invalid read of size 4
+==41849==    at 0x10D134: emiteInstrucao (processor.c:712)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849==  Address 0x4a9c320 is 4 bytes after a block of size 252 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x110E19: aumentaStatusInstrucoes (scoreboarding.c:37)
+==41849==    by 0x10AFEE: buscaInstrucao (processor.c:31)
+==41849==    by 0x1094E9: main (principal.c:36)
+==41849== 
+==41849== Invalid write of size 4
+==41849==    at 0x10C94D: emiteInstrucao (processor.c:627)
+==41849==    by 0x1094DF: main (principal.c:35)
+==41849==  Address 0x4a9b5e4 is 8 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== Invalid read of size 4
+==41849==    at 0x10D4ED: leituraDeOperandos (processor.c:751)
+==41849==    by 0x1094D5: main (principal.c:34)
+==41849==  Address 0x4a9b5e4 is 8 bytes after a block of size 28 alloc'd
+==41849==    at 0x484880F: malloc (vg_replace_malloc.c:431)
+==41849==    by 0x10AF53: inicializaVetorForwarding (processor.c:15)
+==41849==    by 0x10A027: leituraArquivo (main.c:224)
+==41849==    by 0x109468: main (principal.c:22)
+==41849== 
+==41849== 
+==41849== HEAP SUMMARY:
+==41849==     in use at exit: 972 bytes in 3 blocks
+==41849==   total heap usage: 27 allocs, 24 frees, 14,370 bytes allocated
+==41849== 
+==41849== LEAK SUMMARY:
+==41849==    definitely lost: 0 bytes in 0 blocks
+==41849==    indirectly lost: 0 bytes in 0 blocks
+==41849==      possibly lost: 0 bytes in 0 blocks
+==41849==    still reachable: 972 bytes in 3 blocks
+==41849==         suppressed: 0 bytes in 0 blocks
+==41849== Rerun with --leak-check=full to see details of leaked memory
+==41849== 
+==41849== Use --track-origins=yes to see where uninitialised values come from
+==41849== For lists of detected and suppressed errors, rerun with: -s
+==41849== ERROR SUMMARY: 27005 errors from 182 contexts (suppressed: 0 from 0)

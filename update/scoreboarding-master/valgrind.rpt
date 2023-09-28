@@ -1,0 +1,747 @@
+==4480== Memcheck, a memory error detector
+==4480== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==4480== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==4480== Command: ./programa -p testes/buscabinaria.sb -m 150
+==4480== Parent PID: 3072
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10A245: printMemoria (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A072: leituraArquivo (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A45F: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Use of uninitialised value of size 8
+==4480==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10A245: printMemoria (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A072: leituraArquivo (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A45F: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10A245: printMemoria (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A072: leituraArquivo (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A45F: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10A245: printMemoria (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A072: leituraArquivo (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A45F: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E3C85: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10A245: printMemoria (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A072: leituraArquivo (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A45F: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CFF2: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D032: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D04C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D07C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D096: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D0F2: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D10C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D13C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D156: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D1B2: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D1CC: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D1FC: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D216: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D277: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D295: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DB0F: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DB4F: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DB69: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DB99: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DBB3: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DC0C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DC26: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DC56: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DC70: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DCC9: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DCE3: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DD13: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DD2D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DD82: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DDA0: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DDBA: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DDD4: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E60D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E633: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E695: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E6AF: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E6DF: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E6F9: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E752: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E76C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E79C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E7B6: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E80F: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E829: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E859: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E873: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E8C8: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E8E6: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E900: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E91A: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CA94: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CB5D: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CB7B: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CC48: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CD11: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CD2F: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CDFC: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CEC5: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10CEE3: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C68E: leituraDeOperandos (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5BF: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C7D4: leituraDeOperandos (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5BF: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C93A: leituraDeOperandos (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5BF: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F9CF: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10FA7A: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB6E: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB6E: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB6E: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB8F: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB8F: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FB8F: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FC37: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Use of uninitialised value of size 8
+==4480==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FC37: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FC37: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FC37: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E44FB: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FC37: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10FC84: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10FD2F: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE23: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE23: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE23: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE44: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE44: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10FE44: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4B56: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FEEC: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Use of uninitialised value of size 8
+==4480==    at 0x48C833B: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FEEC: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48C834C: _itoa_word (_itoa.c:177)
+==4480==    by 0x48E3B3D: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FEEC: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E4643: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FEEC: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x48E44FB: __vfprintf_internal (vfprintf-internal.c:1516)
+==4480==    by 0x48CE81E: printf (printf.c:33)
+==4480==    by 0x10FEEC: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10FF39: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10FFE4: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100D8: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100D8: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100D8: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F6F6: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100F9: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F72F: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100F9: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== 
+==4480== More than 100 errors detected.  Subsequent errors
+==4480== will still be recorded, but in less detail than before.
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10F765: encontraQ (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1100F9: statusUFs (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A61B: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x111A54: getUFdisponivel (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10B9E9: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x1103F7: printStatusReg (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A625: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x1119D3: getUFdisponivel (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10B9E9: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x1102CD: printStatusReg (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A625: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E95A: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E9A8: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EA02: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EA9A: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EB51: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EB9F: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EBED: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EC85: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10ED3C: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10ED8A: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EDD8: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10EE70: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x111A15: getUFdisponivel (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10B9E9: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B767: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10CF43: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10952F: pegaBarramentoResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x1094D3: colocaBarramentoResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10CF50: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B767: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10EF4B: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10952F: pegaBarramentoResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10EF57: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B85D: escreveNoDestino (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10F02D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B867: escreveNoDestino (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10F02D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B871: escreveNoDestino (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10F02D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Use of uninitialised value of size 8
+==4480==    at 0x10B8F1: escreveNoDestino (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10F02D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D30D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D35B: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D3B5: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D44D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D504: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D552: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D5A0: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D638: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D6EF: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D73D: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D78B: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10D823: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10BE0E: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x110360: printStatusReg (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A625: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x110581: printStatusReg (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A625: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B25B: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10CDAD: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DE14: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DE62: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DEBC: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10DF54: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E00B: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E059: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E0A7: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E13F: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E1F6: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E244: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E292: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10E32A: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B25B: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10E405: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C3F3: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C41C: emiteInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5C9: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10C996: leituraDeOperandos (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5BF: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B56B: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10CF43: execucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5B5: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== Conditional jump or move depends on uninitialised value(s)
+==4480==    at 0x10B56B: executaInstrucao (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10EF4B: escritaResultados (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480==    by 0x10A5AB: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== 
+==4480== Process terminating with default action of signal 2 (SIGINT)
+==4480==    at 0x4982992: read (read.c:26)
+==4480==    by 0x48FACB5: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:516)
+==4480==    by 0x48FBE15: _IO_default_uflow (genops.c:362)
+==4480==    by 0x10A635: main (in /home/luca/Documents/scoreboarding-main/scoreboarding-master/programa)
+==4480== 
+==4480== HEAP SUMMARY:
+==4480==     in use at exit: 17,132 bytes in 9 blocks
+==4480==   total heap usage: 1,367 allocs, 1,358 frees, 4,153,770 bytes allocated
+==4480== 
+==4480== LEAK SUMMARY:
+==4480==    definitely lost: 0 bytes in 0 blocks
+==4480==    indirectly lost: 0 bytes in 0 blocks
+==4480==      possibly lost: 0 bytes in 0 blocks
+==4480==    still reachable: 17,132 bytes in 9 blocks
+==4480==         suppressed: 0 bytes in 0 blocks
+==4480== Reachable blocks (those to which a pointer was found) are not shown.
+==4480== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==4480== 
+==4480== Use --track-origins=yes to see where uninitialised values come from
+==4480== For lists of detected and suppressed errors, rerun with: -s
+==4480== ERROR SUMMARY: 3639845 errors from 160 contexts (suppressed: 0 from 0)
